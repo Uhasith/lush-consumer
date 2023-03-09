@@ -1,0 +1,19 @@
+.flashsale{
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0) -2.24%, #FEB200 -2.23%, #FFDC00 97.51%);
+    padding: 0px 5px 3px 6px ;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;;
+}
+
+
+a {
+  
+    display: inline-block;
+  }
+  a svg {
+    display: inline-block;
+     vertical-align: middle;
+  }
