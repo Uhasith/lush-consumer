@@ -7,8 +7,6 @@ const CartForm = ({ handleTabChange }) => {
 
   const { items, subTotal } = useCart();
 
-  const product = {items}
-
   const initialFormValues = {
     firstName: "",
     lastName: "",
@@ -42,7 +40,7 @@ const CartForm = ({ handleTabChange }) => {
 
   const handleAddressSubmit = (values) => {
   
-    const data = Object.assign({ order: product , total:subTotal, shippingDetail: values })
+    const data = Object.assign({ product: items , total:subTotal, shippingDetail: values, status: "Pending" })
     console.log(">>===>> >>===>> values", data);
   };
 
