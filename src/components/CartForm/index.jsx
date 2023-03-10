@@ -40,8 +40,8 @@ const CartForm = ({ handleTabChange }) => {
 
   const handleAddressSubmit = (values) => {
   
-    const data = Object.assign({ product: items , total:subTotal, shippingDetail: values, status: "Pending" })
-    console.log(">>===>> >>===>> values", data);
+    const order = Object.assign({ products: items , totalPrice:subTotal, shippingDetails: values, status: "Pending" })
+    console.log(">>===>> >>===>> values", order);
   };
 
   return (
