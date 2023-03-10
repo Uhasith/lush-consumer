@@ -28,7 +28,7 @@ const FilterCard = ({
           <img
             src={`${BASE_URL}/v1/documents/product-img/${image}`}
             alt=""
-            className="h-[200px] w-[335px]"
+            className="filtercard-image"
           />
         </div>
         <div className="flex flex-col py-2 px-6 gap-2">
