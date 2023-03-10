@@ -77,6 +77,7 @@ const FarmerPage = () => {
                 images,
                 name,
                 weight,
+                hasPromotion,
                 unitType,
                 price,
                 description,
@@ -91,6 +92,7 @@ const FarmerPage = () => {
                   weight={weight}
                   unitType={unitType}
                   price={price}
+                  hasPromotion={hasPromotion}
                   description={description}
                   farm={farmer?.farm}
                   id={id}

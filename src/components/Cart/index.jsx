@@ -3,13 +3,23 @@ import { useNavigate } from "react-router";
 import { BASE_URL } from "src/constants";
 import { useCart } from "src/hooks";
 
-const Cart = ({ handleTabChange }) => {
+const Cart = ({ handleTabChange, setMustAuthenticate}) => {
   const { items, subTotal, onItemIncrement, onItemDecrement, onItemRemove } =
     useCart();
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+
+  const handleClick = () => {
+    const token = localStorage.getItem('tokens');
+    if (!token) {
+      setMustAuthenticate(true);
+    } else {
+      handleTabChange("SHIPPING INFORMATION");
+    }
+  }
 
   const ItemsNotFound = () => (
     <section class="flex items-center h-full sm:p-16 dark:bg-gray-900 dark:text-gray-100">
@@ -256,7 +266,7 @@ const Cart = ({ handleTabChange }) => {
               <div>
                 <button
                   class="btn bg-[#097435] border-none normal-case rounded-full h-[40px] w-[180px] gap-3"
-                  onClick={() => handleTabChange("SHIPPING INFORMATION")}
+                  onClick={handleClick}
                 >
                   <p className="white">Checkout</p>
                   <svg

@@ -8,6 +8,7 @@ const FilterCard = ({
   name,
   weight,
   unitType,
+  hasPromotion,
   price,
   description,
   farm,
@@ -15,7 +16,6 @@ const FilterCard = ({
   product,
 }) => {
   const { onItemAdd } = useCart();
-
   const handleAddToCart = (item) => {
     onItemAdd({ ...item, qty: 1, totalPrice: item?.price });
   };
@@ -39,9 +39,9 @@ const FilterCard = ({
               {name}
             </a>
             </div>
-            <div class="divider divider-horizontal" />
+            <div className="divider divider-horizontal" />
             <div className="flex">
-            <Flashsales/>
+            {hasPromotion && <Flashsales/>}
             </div>
 
 
@@ -54,7 +54,7 @@ const FilterCard = ({
               {/* <p className="font-bold text-sm line-through">€169</p> */}
               <p className="font-bold text-sm">€{price}</p>
             </div>
-            <div class="divider divider-horizontal" />
+            <div className="divider divider-horizontal" />
             <div className="flex">
               <p className="text-[#4C8AE8] text-sm uppercase">
                 {`${weight} / ${unitType}`} .{" "}
