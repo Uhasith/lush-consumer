@@ -100,7 +100,7 @@ export const Footer = () => {
                   </svg>
                 </a>
               </div>
-              <p class="text-base  text-white">&copy; 2022 by Lush Farmers</p>
+              <p class="text-base  text-white">&copy; 2023 by Lush Farmers</p>
             </div>
           </div>
 

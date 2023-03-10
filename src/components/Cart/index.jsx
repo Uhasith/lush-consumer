@@ -102,9 +102,16 @@ const Cart = ({ handleTabChange, setMustAuthenticate}) => {
                   </div>
                 ))}
               </div>
-            </div>
+              <div className="pickonshop">
+              <div class="flex items-center mb-4 mt-2">
+    <label for="default-checkbox" class="mr-2 text-sm text-[#4B5157]">Pick Up in shop</label>
+    <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4  "/>
+</div>
+              </div>
+            </div> 
+            
           </div>
-        </td>
+        </td> 
         <td>
           <div className="text-sm text-[#4B5157]">€{item?.price}</div>
         </td>
