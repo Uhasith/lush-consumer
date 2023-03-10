@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 
+
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
@@ -24,7 +25,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${window.location.origin}/cart`,
+        return_url: `${window.location.origin}/success`,
       },
     });
 
@@ -34,6 +35,8 @@ export default function CheckoutForm() {
       setMessage("An unexpected error occured.");
     }
 
+
+    
     setIsProcessing(false);
   };
 

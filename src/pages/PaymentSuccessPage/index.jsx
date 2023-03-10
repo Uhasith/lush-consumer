@@ -1,9 +1,32 @@
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-const CashOnDeliverySuccessPage = () => {
+import { useCart } from "src/hooks";
+import { request } from "src/request";
+
+const PaymentSuccessPage = () => {
+  const { orderConfirmData } = useCart();
+
   const navigate = useNavigate();
 
-  const handleContinueShopping = () => {
+  function handleContinueShopping() {
     navigate("/");
+  }
+
+  useEffect(() => {
+    handleSubmitPayment();
+  }, []);
+
+  const handleSubmitPayment = async () => {
+    try {
+      const respone = await request("POST", `/v1/orders`, orderConfirmData);
+    //   clean local storage from here 
+    localStorage.removeItem('subTotal');
+    localStorage.removeItem('orderConfirmData');
+    localStorage.removeItem('items');
+    window.location.reload();
+
+    } catch (err) {}
+   
   };
 
   return (
@@ -29,17 +52,14 @@ const CashOnDeliverySuccessPage = () => {
           </svg>
         </div>
         <h1 className="text-3xl text-gray-800 font-medium mb-4 text-center">
-          Order Placed
+          Payment Successful
         </h1>
         <p className="text-gray-500 text-center mb-8">
-          Thank you for your order! We have received your request and it will be
-          processed shortly. You will be contacted by our team for confirmation
-          and delivery details.
+          Thank you for your payment! Your transaction has been completed
+          successfully.
         </p>
-        <button
-          className="bg-[#097435] hover:bg-[#6CB33F] text-white font-semibold py-2 px-4 rounded w-full"
-          onClick={handleContinueShopping}
-        >
+        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded w-full" 
+        onClick={handleContinueShopping}>
           Continue Shopping
         </button>
       </div>
@@ -47,4 +67,4 @@ const CashOnDeliverySuccessPage = () => {
   );
 };
 
-export default CashOnDeliverySuccessPage;
+export default PaymentSuccessPage;

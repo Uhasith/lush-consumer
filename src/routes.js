@@ -8,6 +8,7 @@ import {
   ProductDetailsPage,
   CartPage,
   PaymentPage,
+  PaymentSuccessPage,
 } from "src/pages";
 
 const RouteLayout = () => {
@@ -23,6 +24,7 @@ const RouteLayout = () => {
         { path: "/products/:productId", element: <ProductDetailsPage /> },
         { path: "/cart", element: <CartPage /> },
         { path: "/payment/:paymentMethod", element: <PaymentPage /> },
+        { path: "/success", element: <PaymentSuccessPage /> },
       ],
     },
   ]);

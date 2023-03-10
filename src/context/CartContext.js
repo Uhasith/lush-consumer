@@ -6,10 +6,12 @@ import _ from "lodash";
 const initialState = {
   items: [],
   subTotal: 0,
+  orderConfirmData: {},
   onItemAdd: () => {},
   onItemIncrement: () => {},
   onItemDecrement: () => {},
   onItemRemove: () => {},
+  onOrderConfirmData: () => {},
 };
 
 const CartContext = createContext(initialState);
@@ -24,6 +26,7 @@ function CartProvider({ children }) {
     "subTotal",
     initialState.subTotal
   );
+  const [orderConfirmData, setOrderConfirmData] = useLocalStorage("orderConfirmData", initialState.orderConfirmData);
 
   useEffect(() => {
     handleTotalPriceUpdate();
@@ -93,15 +96,22 @@ function CartProvider({ children }) {
     setSubTotal(_subTotal);
   };
 
+  const handleOrderConfirmData = (data) => {
+    setOrderConfirmData(data);
+  }
+
+
   return (
     <CartContext.Provider
       value={{
         items,
         subTotal,
+        orderConfirmData,
         onItemAdd: handleItemAdd,
         onItemDecrement: handleItemDecrement,
         onItemIncrement: handleItemIncrement,
         onItemRemove: handleItemRemove,
+        onOrderConfirmData: handleOrderConfirmData,
       }}
     >
       {children}
