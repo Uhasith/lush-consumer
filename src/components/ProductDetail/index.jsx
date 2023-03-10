@@ -1,6 +1,13 @@
 import { BASE_URL } from "src/constants";
+import Flashsales  from "src/components/Flashsale/Flashsale";
+
+
+
 
 const ProductDetail = ({ product }) => {
+
+  
+
   return (
     <div className="py-12 flex gap-10">
       <div className="flex">
@@ -15,13 +22,21 @@ const ProductDetail = ({ product }) => {
         />
       </div>
       <div className="flex flex-col gap-4">
+       
+
+
+
+        <div class="flex">
+  <span class="mr-2"><p className="font-bold text-white px-3 py-1 bg-[#FF4F52] rounded-md">Sale</p></span>
+</div>
+
+
+
+
         <div className="flex">
-          <p className="font-bold text-white px-3 py-1 bg-[#FF4F52] rounded-md">
-            Sale
-          </p>
-        </div>
-        <div className="flex">
-          <h2 className="font-bold text-[25px]">{product?.name}</h2>
+         
+          <span class="mr-2"> <h2 className="font-bold text-[25px]">{product?.name}</h2></span>
+  <span className="mt-1" >{product?.hasPromotion && <Flashsales/>}</span>
         </div>
         <div className="flex gap-4">
           <h2 className="font-bold text-[20px]">Product Discription</h2>
