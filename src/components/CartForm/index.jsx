@@ -1,8 +1,14 @@
 import { Formik } from "formik";
 import { PHONE_REGEXP } from "src/utils/config";
 import * as Yup from "yup";
+import { useCart } from "src/hooks";
 
 const CartForm = ({ handleTabChange }) => {
+
+  const { items, subTotal } = useCart();
+
+  const product = {items}
+
   const initialFormValues = {
     firstName: "",
     lastName: "",
@@ -35,7 +41,9 @@ const CartForm = ({ handleTabChange }) => {
   });
 
   const handleAddressSubmit = (values) => {
-    console.log(">>===>> >>===>> values", values);
+  
+    const data = Object.assign({ order: product , total:subTotal, shippingDetail: values })
+    console.log(">>===>> >>===>> values", data);
   };
 
   return (

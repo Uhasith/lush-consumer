@@ -4,8 +4,7 @@ import { BASE_URL } from "src/constants";
 import { useCart } from "src/hooks";
 
 const Cart = ({ handleTabChange, setMustAuthenticate}) => {
-  const { items, subTotal, onItemIncrement, onItemDecrement, onItemRemove } =
-    useCart();
+  const { items, subTotal, onItemIncrement, onItemDecrement, onItemRemove } = useCart();
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
