@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "src/hooks";
 import { request } from "src/request";
+import { isEmpty } from "lodash";
 
 const PaymentSuccessPage = () => {
   const { orderConfirmData } = useCart();
@@ -13,20 +14,20 @@ const PaymentSuccessPage = () => {
   }
 
   useEffect(() => {
-    handleSubmitPayment();
+    if (!isEmpty(orderConfirmData)) {
+      handleSubmitPayment();
+    }
   }, []);
 
   const handleSubmitPayment = async () => {
     try {
-      const respone = await request("POST", `/v1/orders`, orderConfirmData);
-    //   clean local storage from here 
-    localStorage.removeItem('subTotal');
-    localStorage.removeItem('orderConfirmData');
-    localStorage.removeItem('items');
-    window.location.reload();
+      await request("POST", `/v1/orders`, orderConfirmData);
 
+      localStorage.removeItem("subTotal");
+      localStorage.removeItem("orderConfirmData");
+      localStorage.removeItem("items");
+      window.location.reload();
     } catch (err) {}
-   
   };
 
   return (
@@ -58,8 +59,10 @@ const PaymentSuccessPage = () => {
           Thank you for your payment! Your transaction has been completed
           successfully.
         </p>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded w-full" 
-        onClick={handleContinueShopping}>
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded w-full"
+          onClick={handleContinueShopping}
+        >
           Continue Shopping
         </button>
       </div>
