@@ -5,3 +5,4 @@ export { default as FarmersMarketPage } from "./FarmersMarketPage";
 export { default as ProductDetailsPage } from "./ProductDetailsPage";
 export { default as CartPage } from "./CartPage";
 export { default as PaymentPage } from "./PaymentPage";
+export { default as PaymentSuccessPage } from "./PaymentSuccessPage";

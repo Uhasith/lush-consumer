@@ -6,7 +6,6 @@ import {AuthModal}  from "../../components";
 const CartPage = () => {
   const [selectedTab, setSelectedTab] = useState("CART");
   const [mustAuthenticate, setMustAuthenticate] = useState(false);
-
   const handleTabChange = (tabName) => {
     setSelectedTab(tabName);
   };

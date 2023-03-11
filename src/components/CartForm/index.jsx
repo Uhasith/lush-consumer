@@ -1,8 +1,12 @@
 import { Formik } from "formik";
 import { PHONE_REGEXP } from "src/utils/config";
 import * as Yup from "yup";
+import { useCart } from "src/hooks";
+import { request } from "src/request";
 
 const CartForm = ({ handleTabChange }) => {
+  const { items, subTotal, onOrderConfirmData } = useCart();
+
   const initialFormValues = {
     firstName: "",
     lastName: "",
@@ -15,6 +19,8 @@ const CartForm = ({ handleTabChange }) => {
     emailConfirmation: "",
     phoneNumber: "",
   };
+
+  const _user = JSON.parse(localStorage.getItem("user"));
 
   const shippingSchema = Yup.object({
     firstName: Yup.string().required("First name is required"),
@@ -34,8 +40,32 @@ const CartForm = ({ handleTabChange }) => {
       .required("Phone number is required"),
   });
 
-  const handleAddressSubmit = (values) => {
-    console.log(">>===>> >>===>> values", values);
+  const handleAddressSubmit = async (values) => {
+    const products = items.map((item) => {
+      return {
+        product: item.id,
+        buyer: _user?._id,
+        price: Number(item.price) * Number(item.qty),
+        qty: item.qty,
+        status: item.status,
+        isPickUp: false,
+        status: "Pending"
+      };
+    });
+    const order = {
+      products: products,
+      totalPrice: subTotal,
+      shippingDetails: values,
+      status: "Pending",
+      buyer: _user?._id,
+    };
+    console.log(
+      "🚀 ~ file: index.jsx:50 ~ handleAddressSubmit ~ order:",
+      order
+    );
+
+    onOrderConfirmData(order);
+    handleTabChange("PAYMENT");
   };
 
   return (
