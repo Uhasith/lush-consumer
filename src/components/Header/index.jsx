@@ -4,9 +4,12 @@ import { useCart } from "src/hooks";
 import { AuthModal } from "..";
 import logo from "../../assets/images/Logo.png";
 
+import { useNavigation } from 'react-router-dom';
+
 const Header = () => {
   const [username, setUsername] = useState("");
   const { items } = useCart();
+  const navigate = useNavigation();
 
   useEffect(() => {
     checkIsAuthenticated();
@@ -23,14 +26,39 @@ const Header = () => {
     window.location.reload();
   };
 
+  function handleClick() {
+    navigate('/orderhitory')
+  }
+
   return (
+
     <div className=" sticky top-0 z-30">
+
+
+
+
       <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="container flex flex-wrap justify-between items-center py-2.5">
           <a href="/" class="flex items-center">
+
             <img src={logo} class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
           </a>
           <div class="flex items-center">
+
+
+
+
+
+          <div class="mr-6 text-sm font-medium text-gray-500 dark:text-white" onClick={handleClick}>
+                <label
+                  for="my-modal-4"
+                  class="gap-2 btn btn-outline rounded-3xl h-[40px] normal-case border-[#D9DADB]  modal-button modal-open"
+                >
+                  My Orders
+                </label>
+              </div>
+
+
             {username ? (
               <div class="mr-6 text-sm font-medium text-gray-500 dark:text-white">
                 <div className="dropdown dropdown-end ">
