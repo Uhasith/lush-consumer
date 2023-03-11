@@ -1,8 +1,8 @@
 import { Formik } from "formik";
 import { PHONE_REGEXP } from "src/utils/config";
 import * as Yup from "yup";
+import { omit } from "lodash";
 import { useCart } from "src/hooks";
-import { request } from "src/request";
 
 const CartForm = ({ handleTabChange }) => {
   const { items, subTotal, onOrderConfirmData } = useCart();
@@ -45,24 +45,19 @@ const CartForm = ({ handleTabChange }) => {
       return {
         product: item.id,
         buyer: _user?._id,
-        price: Number(item.price) * Number(item.qty),
-        qty: item.qty,
-        status: item.status,
+        price: String(Number(item?.price) * Number(item?.qty)),
+        qty: String(item.qty),
         isPickUp: false,
-        status: "Pending"
+        status: "Pending",
       };
     });
     const order = {
       products: products,
-      totalPrice: subTotal,
-      shippingDetails: values,
+      totalPrice: String(subTotal),
+      shippingDetails: omit(values, ["city", "emailConfirmation"]),
       status: "Pending",
       buyer: _user?._id,
     };
-    console.log(
-      "🚀 ~ file: index.jsx:50 ~ handleAddressSubmit ~ order:",
-      order
-    );
 
     onOrderConfirmData(order);
     handleTabChange("PAYMENT");
