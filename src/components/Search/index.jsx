@@ -17,7 +17,11 @@ const Search = ({ isSearch, title }) => {
       farmers?.map(({ id, profilePic, firstName, lastName }) => (
         <div class="card card-compact w-96 bg-base-100 shadow-none" key={id}>
           <img
-            src={`${BASE_URL}/v1/documents/prof-pic/${profilePic}`}
+            src={
+              profilePic
+                ? `${BASE_URL}/v1/documents/prof-pic/${profilePic}`
+                : `https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png`
+            }
             class="rounded-lg"
             alt="img"
           />

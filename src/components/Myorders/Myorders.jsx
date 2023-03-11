@@ -2,32 +2,32 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { request } from "src/request";
-import moment from 'moment';
-
+import moment from "moment";
 
 function Myorders() {
-
   const [orders, setOrders] = useState([]);
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(localStorage.getItem("user"));
 
-  useEffect(() => {
-    getOrders();
-  }, []);
+  // useEffect(() => {
+  //   getOrders();
+  // }, []);
 
-  const getOrders = async () => {
-    const response = await request("GET", `/v1/orders`);
-    setOrders(response.results);
-  };
+  // const getOrders = async () => {
+  //   const response = await request("GET", `/v1/orders`);
+  //   setOrders(response.results);
+  // };
 
-  const filterOrderList = () => {
-    const buyerOrder = orders?.filter((order) => {
-      const productOwner = order.results.filter( order.createdBy === currentUser?._id);
-      return productOwner.length > 0;
-    });
+  // const filterOrderList = () => {
+  //   const buyerOrder = orders?.filter((order) => {
+  //     const productOwner = order.results.filter(
+  //       order.createdBy === currentUser?._id
+  //     );
+  //     return productOwner.length > 0;
+  //   });
 
-    setOrders(result);
-  };
+  //   setOrders(result);
+  // };
 
   console.log(orders);
 
@@ -48,29 +48,33 @@ function Myorders() {
             </tr>
           </thead>
           <tbody>
-        {orders.map((order) => (
-          <tr
-            key={order.id}
-            className="bg-gray-100 hover:bg-gray-200 text-center"
-          >
-            <td className="border px-4 py-2">{order?.orderId}</td>
-            <td className="border px-4 py-2">{moment(order?.createdAt).format('YYYY-MM-DD') || '-'}</td>
-            <td className="border px-4 py-2">{order?.totalPrice}</td>
-            <td className="border px-4 py-2">{moment(order?.createdAt).format('YYYY-MM-DD') || '-'}</td>
-            <td className="border px-4 py-2">
-              <span
-                className={`inline-block py-1 px-2 rounded-md ${
-                  order.status === "Completed"
-                    ? "bg-green-500 text-white"
-                    : "bg-yellow-500 text-black"
-                }`}
+            {orders.map((order) => (
+              <tr
+                key={order.id}
+                className="bg-gray-100 hover:bg-gray-200 text-center"
               >
-                {order?.status}
-              </span>
-            </td>
-          </tr>
-        ))}
-      </tbody>
+                <td className="border px-4 py-2">{order?.orderId}</td>
+                <td className="border px-4 py-2">
+                  {moment(order?.createdAt).format("YYYY-MM-DD") || "-"}
+                </td>
+                <td className="border px-4 py-2">{order?.totalPrice}</td>
+                <td className="border px-4 py-2">
+                  {moment(order?.createdAt).format("YYYY-MM-DD") || "-"}
+                </td>
+                <td className="border px-4 py-2">
+                  <span
+                    className={`inline-block py-1 px-2 rounded-md ${
+                      order.status === "Completed"
+                        ? "bg-green-500 text-white"
+                        : "bg-yellow-500 text-black"
+                    }`}
+                  >
+                    {order?.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </Fragment>
