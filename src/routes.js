@@ -26,7 +26,7 @@ const RouteLayout = () => {
         { path: "/products/:productId", element: <ProductDetailsPage /> },
         { path: "/cart", element: <CartPage /> },
         { path: "/payment/:paymentMethod", element: <PaymentPage /> },
-        { path: "/orderhitory", element: <Myorders/> },
+        { path: "/orderhistory", element: <Myorders/> },
         { path: "/success", element: <PaymentSuccessPage /> },
       ],
     },
