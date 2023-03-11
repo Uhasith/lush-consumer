@@ -10,6 +10,8 @@ import {
   PaymentPage,
 } from "src/pages";
 
+import Myorders from "../src/components/Myorders/Myorders"
+
 const RouteLayout = () => {
   const routes = useRoutes([
     {
@@ -23,6 +25,7 @@ const RouteLayout = () => {
         { path: "/products/:productId", element: <ProductDetailsPage /> },
         { path: "/cart", element: <CartPage /> },
         { path: "/payment/:paymentMethod", element: <PaymentPage /> },
+        { path: "/orderhitory", element: <Myorders/> },
       ],
     },
   ]);
