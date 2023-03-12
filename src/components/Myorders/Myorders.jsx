@@ -17,11 +17,11 @@ function Myorders() {
     try {
       const response = await request("GET", `/v1/orders`);
       const allOrders = response.results;
-      console.log(allOrders);
+
       const filteredOrders = allOrders.filter(
         (order) => order.buyer && order.buyer.id === user._id
       );
-      console.log(filteredOrders);
+
       setOrders(filteredOrders);
     } catch (error) {
       console.error(error);
