@@ -15,37 +15,36 @@ const Search = ({ isSearch, title }) => {
   const ShortSearchList = () => {
     return farmers?.length > 0 ? (
       farmers?.map(({ id, profilePic, firstName, lastName }) => (
-
         <div>
+          
+          {/* //////////////////////////////////Update card////////////////////////////////////// */}
 
-{/* //////////////////////////////////////////////////////////////////////// */}
-<div className="max-w-sm rounded overflow-hidden shadow-lg" key={id}>
-  <img className="w-full" src={
-              profilePic
-                ? `${BASE_URL}/v1/documents/prof-pic/${profilePic}`
-                : `https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png`
-            }
-            classNameName="rounded-lg"
-            alt="img"/>
+          <div
+            className="w-64 sm:w-48 md:w-60 lg:w-300 h-80 max-h-full hover:max-h-screen bg-white rounded-lg shadow-lg p-6  hover:bg-green-100 ..."
+            key={id}
+          >
+            <img
+              className="h-48 max-h-full"
+              src={
+                profilePic
+                  ? `${BASE_URL}/v1/documents/prof-pic/${profilePic}`
+                  : `https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png`
+              }
+              classNameName="rounded-lg"
+              // height={100}
+              alt="img"
+            />
 
-  <div className="px-6 py-4">
-    <a className="font-bold text-xl mb-2" href={`/farmers/${id}`}>
-              {`${firstName} ${lastName}`}
-            </a>
+            <div className="text-center mt-5 py-4">
+              <a className="font-bold text-xl mb-2 text-lg text-gray-600 hover:text-green-500 hover:text-xl" href={`/farmers/${id}`}>
+                {`${firstName} ${lastName}`}
+              </a>
+            </div>
+          </div>
 
-
-   
-  </div>
-  <div className="px-6 pt-4 pb-2">
-    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-  </div>
-</div>
           {/* //////////////////////////////////////////////////////////////////////// */}
 
-      
-        <div className="card card-compact w-96 bg-base-100 shadow-none" key={id}>
+          {/* <div className="card card-compact w-96 bg-base-100 shadow-none" key={id}>
           <img
             src={
               profilePic
@@ -62,7 +61,7 @@ const Search = ({ isSearch, title }) => {
           </div>
 
           
-        </div>
+        </div> */}
         </div>
       ))
     ) : (
@@ -126,7 +125,7 @@ const Search = ({ isSearch, title }) => {
             <h2 classNameName="font-bold text-[#262D33] text-xl">{title}</h2>
           </div>
         )}
-        <div className="flex mt-[40px]" style={{ columnGap: "5rem" }}>
+        <div className="flex mt-[40px]" style={{ columnGap: "4rem" }}>
           <ShortSearchList />
         </div>
         <hr className="mt-10" />
