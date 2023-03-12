@@ -1,6 +1,29 @@
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "src/hooks";
+import { request } from "src/request";
+import { isEmpty } from "lodash";
+
 const CashOnDeliverySuccessPage = () => {
   const navigate = useNavigate();
+  const { orderConfirmData } = useCart();
+
+  useEffect(() => {
+    if (!isEmpty(orderConfirmData)) {
+      handleSubmitPayment();
+    }
+  }, []);
+
+  const handleSubmitPayment = async () => {
+    try {
+      await request("POST", `/v1/orders`, orderConfirmData);
+
+      localStorage.removeItem("subTotal");
+      localStorage.removeItem("orderConfirmData");
+      localStorage.removeItem("items");
+      window.location.reload();
+    } catch (err) {}
+  };
 
   const handleContinueShopping = () => {
     navigate("/");
