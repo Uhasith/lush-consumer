@@ -9,9 +9,9 @@ const PaymentSuccessPage = () => {
 
   const navigate = useNavigate();
 
-  function handleContinueShopping() {
+  const handleContinueShopping = () => {
     navigate("/");
-  }
+  };
 
   useEffect(() => {
     if (!isEmpty(orderConfirmData)) {

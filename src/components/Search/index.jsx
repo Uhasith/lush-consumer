@@ -15,21 +15,53 @@ const Search = ({ isSearch, title }) => {
   const ShortSearchList = () => {
     return farmers?.length > 0 ? (
       farmers?.map(({ id, profilePic, firstName, lastName }) => (
-        <div class="card card-compact w-96 bg-base-100 shadow-none" key={id}>
+        <div>
+          
+          {/* //////////////////////////////////Update card////////////////////////////////////// */}
+
+          <div
+            className="w-64 sm:w-48 md:w-60 lg:w-300 h-80 max-h-full hover:max-h-screen bg-white rounded-lg shadow-lg p-6  hover:bg-green-100 ..."
+            key={id}
+          >
+            <img
+              className="h-48 max-h-full"
+              src={
+                profilePic
+                  ? `${BASE_URL}/v1/documents/prof-pic/${profilePic}`
+                  : `https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png`
+              }
+              classNameName="rounded-lg"
+              // height={100}
+              alt="img"
+            />
+
+            <div className="text-center mt-5 py-4">
+              <a className="font-bold text-xl mb-2 text-lg text-gray-600 hover:text-green-500 hover:text-xl" href={`/farmers/${id}`}>
+                {`${firstName} ${lastName}`}
+              </a>
+            </div>
+          </div>
+
+          {/* //////////////////////////////////////////////////////////////////////// */}
+
+          {/* <div className="card card-compact w-96 bg-base-100 shadow-none" key={id}>
           <img
             src={
               profilePic
                 ? `${BASE_URL}/v1/documents/prof-pic/${profilePic}`
                 : `https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png`
             }
-            class="rounded-lg"
+            className="rounded-lg"
             alt="img"
           />
-          <div class="card-body" style={{ padding: "16px 0px" }}>
-            <a class="card-title pt-1" href={`/farmers/${id}`}>
+          <div className="card-body" style={{ padding: "16px 0px" }}>
+            <a className="card-title pt-1" href={`/farmers/${id}`}>
               {`${firstName} ${lastName}`}
             </a>
           </div>
+
+          
+        </div> */}
         </div>
       ))
     ) : (
@@ -52,21 +84,21 @@ const Search = ({ isSearch, title }) => {
   };
 
   return (
-    <div class="bg-white flex align-start gap-4">
-      <div class="w-full">
+    <div className="bg-white flex align-start gap-4">
+      <div className="w-full">
         {isSearch && (
-          <div class="form-control">
-            <div class="input-group">
+          <div className="form-control">
+            <div className="input-group">
               <input
                 type="text"
                 placeholder="Farmer market near"
-                class="input input-bordered w-[528px] border border-[#D2D4D7]"
+                className="input input-bordered w-[528px] border border-[#D2D4D7]"
                 value={keyword}
                 onChange={(e) => setKeyword(e?.target?.value)}
               />
 
               <button
-                class="btn btn-square bg-white border border-[#D2D4D7]"
+                className="btn btn-square bg-white border border-[#D2D4D7]"
                 onClick={handleSearch}
               >
                 <svg
@@ -89,14 +121,14 @@ const Search = ({ isSearch, title }) => {
           </div>
         )}
         {title && (
-          <div className="mt-[40px]">
-            <h2 className="font-bold text-[#262D33] text-xl">{title}</h2>
+          <div classNameName="mt-[40px]">
+            <h2 classNameName="font-bold text-[#262D33] text-xl">{title}</h2>
           </div>
         )}
-        <div class="flex mt-[40px]" style={{ columnGap: "5rem" }}>
+        <div className="flex mt-[40px]" style={{ columnGap: "4rem" }}>
           <ShortSearchList />
         </div>
-        <hr class="mt-10" />
+        <hr className="mt-10" />
       </div>
     </div>
   );
