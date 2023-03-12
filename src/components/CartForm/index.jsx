@@ -26,6 +26,7 @@ const CartForm = ({ handleTabChange }) => {
     firstName: Yup.string().required("First name is required"),
     lastName: Yup.string().required("Last name is required"),
     address1: Yup.string().required("Address name is required"),
+    address2: Yup.string().required("Address name is required"),
 
     country: Yup.string().required("Country is required"),
     city: Yup.string().required("City is required"),
@@ -135,7 +136,7 @@ const CartForm = ({ handleTabChange }) => {
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text font-bold">
-                      Address 2 (Optional)
+                      Address 2 
                     </span>
                   </label>
                   <input

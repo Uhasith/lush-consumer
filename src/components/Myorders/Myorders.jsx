@@ -7,29 +7,26 @@ import moment from "moment";
 function Myorders() {
   const [orders, setOrders] = useState([]);
 
-  // const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  // useEffect(() => {
-  //   getOrders();
-  // }, []);
+  useEffect(() => {
+    getOrders();
+  }, []);
 
-  // const getOrders = async () => {
-  //   const response = await request("GET", `/v1/orders`);
-  //   setOrders(response.results);
-  // };
-
-  // const filterOrderList = () => {
-  //   const buyerOrder = orders?.filter((order) => {
-  //     const productOwner = order.results.filter(
-  //       order.createdBy === currentUser?._id
-  //     );
-  //     return productOwner.length > 0;
-  //   });
-
-  //   setOrders(result);
-  // };
-
-  console.log(orders);
+  const getOrders = async () => {
+    try {
+      const response = await request("GET", `/v1/orders`);
+      const allOrders = response.results;
+      console.log(allOrders);
+      const filteredOrders = allOrders.filter(
+        (order) => order.buyer && order.buyer.id === user._id
+      );
+      console.log(filteredOrders);
+      setOrders(filteredOrders);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Fragment>
