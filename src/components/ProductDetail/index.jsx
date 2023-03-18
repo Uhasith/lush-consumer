@@ -1,12 +1,14 @@
 import { BASE_URL } from "src/constants";
 import Flashsales  from "src/components/Flashsale/Flashsale";
 
-
+import React, { useEffect } from 'react';
 
 
 const ProductDetail = ({ product }) => {
 
-  
+  ///////////////////////////////////////////////3.15.2023////////////////////////
+ 
+  ///////////////////////////////////////////////3.15.2023////////////////////////
 
   return (
     <div className="py-12 flex gap-10">
