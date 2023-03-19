@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFarm } from "src/hooks";
 import { request } from "src/request";
+import Select from 'react-select';
 
 const Hero = () => {
   const location = useLocation();
@@ -9,7 +10,8 @@ const Hero = () => {
   const { onProductChange, products } = useFarm();
   const [isMapView, setIsMapView] = useState(true);
   const [product, setProduct] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(null);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     if (location.pathname.includes("search")) {
@@ -17,6 +19,7 @@ const Hero = () => {
     } else {
       setIsMapView(true);
     }
+    getAllCategories();
   }, []);
 
   useEffect(() => {
@@ -55,6 +58,12 @@ const Hero = () => {
     onProductChange(response);
   };
 
+  const getAllCategories = async () => {
+    const response = await request("GET", `/v1/categories`)
+    console.log(response)
+    setCategories(response.results);
+  };
+
   return (
     <div class="bg-white text-center pt-[60px]">
       <div class="w-full">
@@ -66,21 +75,21 @@ const Hero = () => {
           Fresh Produce has never been closer
         </h1>
         <div className="pt-[50px] flex justify-between">
-          <div className="flex gap-8">
+          <div className="flex gap-12">
             <input
               type="text"
               placeholder="Search by Produce (Fruits, Vegetables, Honey, wine...)"
-              class="input input-bordered w-[389px]"
+              class="input input-bordered w-[600px]"
               value={product}
               onChange={(e) => setProduct(e.target.value)}
             />
-            <input
-              type="text"
-              placeholder="Select Category"
-              class="input input-bordered w-[415px]"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            />
+            {categories && categories.length > 0 &&
+            <Select
+              options={categories.map(category => ({value: category.name, label: category.name}))}
+              value={category && { value: category, label: category }}
+              onChange={(selectedOption) => setCategory(selectedOption.value)}
+              className="w-full mt-1"
+            />}
           </div>
 
           <div className="flex gap-4">
