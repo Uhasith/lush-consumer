@@ -18,10 +18,13 @@ const AuthModal = () => {
     const [emailError, setEmailError] = useState("");
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [error, setError] = useState("");
 
     const handleRegistration = async (event) => {
       event.preventDefault();
       try {
+
+        setError("");
         if (fullName == "") {
           return setFullNameError("Fullname is required");
         }
@@ -55,9 +58,13 @@ const AuthModal = () => {
         }
         setIsLoading(false);
         window.location.reload();
+
       } catch (err) {
-        console.log(err?.message);
+
+        window.alert(err?.message || "Something went wrong")
         setIsLoading(false);
+        setError(JSON.stringify(err.message));
+        
       }
     };
 
@@ -71,7 +78,7 @@ const AuthModal = () => {
             </label>
             <input
               name="fullName"
-              type="text"
+              type="name"
               className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#009879] focus:outline-none focus:ring-white sm:text-sm"
               placeholder="Full Name"
               onChange={(event) => setFullName(event.target.value)}
@@ -89,7 +96,7 @@ const AuthModal = () => {
             </label>
             <input
               name="phoneNumber"
-              type="text"
+              type="tel"
               className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#009879] focus:outline-none focus:ring-white sm:text-sm"
               placeholder="Phone Number"
               onChange={(event) => setPhoneNumber(event.target.value)}
@@ -107,7 +114,7 @@ const AuthModal = () => {
             </label>
             <input
               name="address"
-              type="text"
+              type="address"
               className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#009879] focus:outline-none focus:ring-white sm:text-sm"
               placeholder="Address"
               onChange={(event) => setAddress(event.target.value)}
@@ -156,6 +163,11 @@ const AuthModal = () => {
         </div>
 
         <div>
+
+        {error ?(
+              <p className="inline-flex text-sm text-red-700">Email already taken{error}</p>
+            ):null}
+
           <button
             className="modal-action group relative flex w-full justify-center rounded-md border border-transparent bg-[#097435] py-2 px-4 text-sm font-medium text-white hover:bg-[#009879] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
             onClick={handleRegistration}
