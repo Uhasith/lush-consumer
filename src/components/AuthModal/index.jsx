@@ -3,6 +3,8 @@ import { request } from "src/request";
 import logo from "../../assets/images/Logo.png";
 import Loading from "../Loading";
 
+
+
 const AuthModal = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,8 +21,22 @@ const AuthModal = () => {
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [error, setError] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [SameemailError, setSameEmailError] = useState("");
+
+
+
 
     const handleRegistration = async (event) => {
+
+//////////////////////inputfeild validation/////////////////////////
+      const isEmailValid = (email) => {
+        const emailRegex = /\S+@\S+\.\S+/;
+        return emailRegex.test(email);
+      }
+      const phoneRegex = /^\d{10}$/; // Regex to match a 10-digit phone number
+//////////////////////inputfeild validation/////////////////////////
+      
       event.preventDefault();
       try {
 
@@ -28,13 +44,13 @@ const AuthModal = () => {
         if (fullName == "") {
           return setFullNameError("Fullname is required");
         }
-        if (phoneNumber == "") {
-          return setPhoneNumberError("Phone number is required");
+        if (!phoneRegex.test(phoneNumber)) {
+          return setPhoneNumberError("Please enter a valid 10-digit phone number");
         }
         if (address == "") {
           return setAddressError("Address is required");
         }
-        if (email == "") {
+        if (!isEmailValid(email)) {
           return setEmailError("A valid email is required");
         }
         if (password == "") {
@@ -51,25 +67,43 @@ const AuthModal = () => {
           };
           setIsLoading(true);
           const response = await request("POST", "/v1/auth/register", payload);
+          console.log(error);
           if (response?.tokens) {
             localStorage.setItem("tokens", JSON.stringify(response.tokens));
             localStorage.setItem("user", JSON.stringify(response.user));
           }
         }
         setIsLoading(false);
-        window.location.reload();
+        // window.location.reload();
 
       } catch (err) {
 
-        window.alert(err?.message || "Something went wrong")
-        setIsLoading(false);
-        setError(JSON.stringify(err.message));
+       // error handling
+    const errorMessage = err?.message || "Something went wrong";
+    setSameEmailError(err?.message);
+    setIsLoading(false);
+    setError(errorMessage);
+    
+
+   window.alert(errorMessage);
         
       }
     };
 
+    // console.log(SameemailError);
+
+
+
+   
+    
+
+    
+    
+
     return (
       <form className="mt-8 space-y-6">
+
+        
         <input type="hidden" name="remember" value="true" />
         <div className="-space-y-px rounded-md shadow-sm">
           <div className="pb-2">
@@ -79,17 +113,21 @@ const AuthModal = () => {
             <input
               name="fullName"
               type="name"
-              className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#009879] focus:outline-none focus:ring-white sm:text-sm"
+              className="relative block w-full appearance-none input input-success input-bordered bg-primary-content text-gray-900"
               placeholder="Full Name"
               onChange={(event) => setFullName(event.target.value)}
               onFocus={() => setFullNameError("")}
             />
+           
             {fullNameError && (
-              <p className="inline-flex text-sm text-red-700">
+              <p className="inline-flex text-sm text-red-500">
                 {fullNameError}
               </p>
             )}
           </div>
+
+         
+
           <div className="pb-2">
             <label for="email-address" className="sr-only">
               Phone Number
@@ -97,17 +135,21 @@ const AuthModal = () => {
             <input
               name="phoneNumber"
               type="tel"
-              className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#009879] focus:outline-none focus:ring-white sm:text-sm"
+              className="relative block w-full appearance-none input input-success input-bordered bg-primary-content text-gray-900"
               placeholder="Phone Number"
               onChange={(event) => setPhoneNumber(event.target.value)}
               onFocus={() => setPhoneNumberError("")}
             />
+            
             {phoneNumberError && (
-              <p className="inline-flex text-sm text-red-700">
+              <p className="inline-flex text-sm text-red-500">
                 {phoneNumberError}
               </p>
             )}
           </div>
+
+
+
           <div className="pb-2">
             <label for="email-address" className="sr-only">
               Address
@@ -115,13 +157,15 @@ const AuthModal = () => {
             <input
               name="address"
               type="address"
-              className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#009879] focus:outline-none focus:ring-white sm:text-sm"
+              className="relative block w-full appearance-none input input-success input-bordered bg-primary-content text-gray-900"
               placeholder="Address"
               onChange={(event) => setAddress(event.target.value)}
               onFocus={() => setAddressError("")}
             />
+
+            
             {addressError && (
-              <p className="inline-flex text-sm text-red-700">{addressError}</p>
+              <p className="inline-flex text-sm text-red-500">{addressError}</p>
             )}
           </div>
           <div className="pb-2">
@@ -132,14 +176,23 @@ const AuthModal = () => {
               name="email"
               type="email"
               autocomplete="email"
-              className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#009879] focus:outline-none focus:ring-white sm:text-sm"
+              className="relative block w-full appearance-none input input-success input-bordered bg-primary-content text-gray-900"
               placeholder="Email address"
               onChange={(event) => setEmail(event.target.value)}
               onFocus={() => setEmailError("")}
             />
+            
             {emailError && (
-              <p className="inline-flex text-sm text-red-700">{emailError}</p>
+              <p className="inline-flex text-sm text-red-500">{emailError}</p>
+             
             )}
+
+{SameemailError && (
+              <p className="inline-flex text-sm text-red-500">{SameemailError}</p>
+             
+            )}
+
+
           </div>
           <div className="pb-2">
             <label for="password" className="sr-only">
@@ -149,13 +202,13 @@ const AuthModal = () => {
               name="password"
               type="password"
               autocomplete="current-password"
-              className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#009879] focus:outline-none focus:ring-white sm:text-sm"
+              className="relative block w-full appearance-none input input-success input-bordered bg-primary-content text-gray-900"
               placeholder="Password"
               onChange={(event) => setPassword(event.target.value)}
               onFocus={() => setPasswordError("")}
             />
             {passwordError && (
-              <p className="inline-flex text-sm text-red-700">
+              <p className="inline-flex text-sm text-red-500">
                 {passwordError}
               </p>
             )}
@@ -165,8 +218,9 @@ const AuthModal = () => {
         <div>
 
         {error ?(
-              <p className="inline-flex text-sm text-red-700">Email already taken{error}</p>
+              <p className="inline-flex text-sm text-red-500">Email already taken{error}</p>
             ):null}
+            
 
           <button
             className="modal-action group relative flex w-full justify-center rounded-md border border-transparent bg-[#097435] py-2 px-4 text-sm font-medium text-white hover:bg-[#009879] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
@@ -243,7 +297,7 @@ const AuthModal = () => {
               onFocus={() => setEmailError("")}
             />
             {emailError && (
-              <p className="inline-flex text-sm text-red-700">{emailError}</p>
+              <p className="inline-flex text-sm text-red-500">{emailError}</p>
             )}
           </div>
           <div className="pb-2">
@@ -260,7 +314,7 @@ const AuthModal = () => {
               onFocus={() => setPasswordError("")}
             />
             {passwordError && (
-              <p className="inline-flex text-sm text-red-700">
+              <p className="inline-flex text-sm text-red-500">
                 {passwordError}
               </p>
             )}
@@ -322,9 +376,9 @@ const AuthModal = () => {
 
   return (
     <>
-      <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-      <label for="my-modal-4" class="modal cursor-pointer">
-        <label class="modal-box relative" for="">
+      <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+      <label for="my-modal-4" className="modal cursor-pointer">
+        <label className="modal-box relative" for="">
           <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
               <div>

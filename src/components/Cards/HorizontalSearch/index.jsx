@@ -30,7 +30,7 @@ const HorizontalSearch = ({ data }) => {
         <div className="flex">
           <div className="flex gap-2">
             <p className="font-bold text-sm">
-              {`$ ${data?.price} per ${data?.unitType}` || "-"}
+              {`€ ${data?.price} per ${data?.unitType}` || "-"}
             </p>
           </div>
           <div class="divider divider-horizontal" />

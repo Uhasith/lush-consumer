@@ -36,7 +36,7 @@ const Search = ({ isSearch, title }) => {
             />
 
             <div className="text-center mt-5 py-4">
-              <a className="font-bold text-xl mb-2 text-lg text-gray-600 hover:text-green-500 hover:text-xl" href={`/farmers/${id}`}>
+              <a className="font-bold  mb-2 text-lg text-gray-600 hover:text-green-500 hover:text-xl" href={`/farmers/${id}`}>
                 {`${firstName} ${lastName}`}
               </a>
             </div>
@@ -69,19 +69,35 @@ const Search = ({ isSearch, title }) => {
     );
   };
 
+  // const handleSearch = () => {
+  //   if (keyword == "") {
+  //     return setFarmers(currentFarm?.farmers);
+  //   }
+  //   const foundFarmers = _.filter(
+  //     farmers,
+  //     _.flow(
+  //       _.values,
+  //       _.partialRight(_.some, _.method("match", new RegExp(keyword, "i")))
+  //     )
+  //   );
+  //   setFarmers(foundFarmers);
+  // };
+
+
+  ////////////////////////////////////3.20.23/////////////////////////////////////
   const handleSearch = () => {
-    if (keyword == "") {
+    if (keyword === "") {
       return setFarmers(currentFarm?.farmers);
     }
-    const foundFarmers = _.filter(
-      farmers,
-      _.flow(
-        _.values,
-        _.partialRight(_.some, _.method("match", new RegExp(keyword, "i")))
-      )
-    );
+  
+    const foundFarmers = _.filter(farmers, (farmer) => {
+      const fullName = `${farmer.firstName} ${farmer.lastName}`.toLowerCase();
+      return fullName.includes(keyword.toLowerCase());
+    });
+  
     setFarmers(foundFarmers);
   };
+  ////////////////////////////////////3.20.23/////////////////////////////////////
 
   return (
     <div className="bg-white flex align-start gap-4">
