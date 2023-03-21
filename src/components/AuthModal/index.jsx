@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { request } from "src/request";
 import logo from "../../assets/images/Logo.png";
 import Loading from "../Loading";
-
-
 
 const AuthModal = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,89 +19,80 @@ const AuthModal = () => {
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [error, setError] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-    const [SameemailError, setSameEmailError] = useState("");
 
+    useEffect(() => {
+      return () => {
+        localStorage.removeItem("serverError");
+      };
+    }, []);
 
+    let serveError = localStorage.getItem("serverError");
 
-
-    const handleRegistration = async (event) => {
-
-//////////////////////inputfeild validation/////////////////////////
-      const isEmailValid = (email) => {
-        const emailRegex = /\S+@\S+\.\S+/;
-        return emailRegex.test(email);
-      }
-      const phoneRegex = /^\d{10}$/; // Regex to match a 10-digit phone number
-//////////////////////inputfeild validation/////////////////////////
-      
-      event.preventDefault();
-      try {
-
-        setError("");
-        if (fullName == "") {
-          return setFullNameError("Fullname is required");
-        }
-        if (!phoneRegex.test(phoneNumber)) {
-          return setPhoneNumberError("Please enter a valid 10-digit phone number");
-        }
-        if (address == "") {
-          return setAddressError("Address is required");
-        }
-        if (!isEmailValid(email)) {
-          return setEmailError("A valid email is required");
-        }
-        if (password == "") {
-          return setPasswordError("A strong password is required");
-        } else {
-          const payload = {
-            firstName: fullName.split(" ")?.[0],
-            lastName: fullName.split(" ")?.[1] || "",
-            userType: "Visitor",
-            email,
-            password,
-            phoneNumber,
-            address,
-          };
-          setIsLoading(true);
-          const response = await request("POST", "/v1/auth/register", payload);
-          console.log(error);
-          if (response?.tokens) {
-            localStorage.setItem("tokens", JSON.stringify(response.tokens));
-            localStorage.setItem("user", JSON.stringify(response.user));
-          }
-        }
-        setIsLoading(false);
-        // window.location.reload();
-
-      } catch (err) {
-
-       // error handling
-    const errorMessage = err?.message || "Something went wrong";
-    setSameEmailError(err?.message);
-    setIsLoading(false);
-    setError(errorMessage);
-    
-
-   window.alert(errorMessage);
-        
-      }
+    const isEmailValid = (email) => {
+      const emailRegex = /\S+@\S+\.\S+/;
+      return emailRegex.test(email);
     };
 
-    // console.log(SameemailError);
+    const phoneRegex = /^\d$/;
 
+    const fullNameRegex = /^\S+ \S+$/;
 
-
-   
-    
-
-    
-    
+    const handleRegistration = async (event) => {
+      event.preventDefault();
+      if (fullName === "") {
+        setFullNameError("Fullname is required");
+        return;
+      }
+      if (!fullNameRegex.test(fullName)) {
+        setFullNameError("Please Check Your Fullname Again");
+        return;
+      }
+      if (!phoneRegex.test(phoneNumber)) {
+        setPhoneNumberError("Please enter a valid phone number");
+        return;
+      }
+      if (address === "") {
+        setAddressError("Address is required");
+        return;
+      }
+      if (!isEmailValid(email)) {
+        setEmailError("A valid email is required");
+        return;
+      }
+      if (password === "") {
+        setPasswordError("A strong password is required");
+        return;
+      }
+      const payload = {
+        firstName: fullName.split(" ")?.[0],
+        lastName: fullName.split(" ")?.[1] || "",
+        userType: "Visitor",
+        email,
+        password,
+        phoneNumber,
+        address,
+      };
+      setIsLoading(true);
+      try {
+        const response = await request("POST", "/v1/auth/register", payload);
+        if (response?.tokens) {
+          localStorage.setItem("tokens", JSON.stringify(response.tokens));
+          localStorage.setItem("user", JSON.stringify(response.user));
+          localStorage.removeItem("serverError");
+        }
+      } catch (err) {
+        const errorMessage = err?.message || "Something went wrong";
+        localStorage.setItem("serverError", JSON.stringify(errorMessage));
+      }
+      setIsLoading(false);
+      if(localStorage.getItem('user')){
+        window.location.reload();
+      }
+  
+    };
 
     return (
-      <form className="mt-8 space-y-6">
-
-        
+      <form id="signupForm" className="mt-8 space-y-6">
         <input type="hidden" name="remember" value="true" />
         <div className="-space-y-px rounded-md shadow-sm">
           <div className="pb-2">
@@ -118,15 +107,13 @@ const AuthModal = () => {
               onChange={(event) => setFullName(event.target.value)}
               onFocus={() => setFullNameError("")}
             />
-           
+
             {fullNameError && (
               <p className="inline-flex text-sm text-red-500">
                 {fullNameError}
               </p>
             )}
           </div>
-
-         
 
           <div className="pb-2">
             <label for="email-address" className="sr-only">
@@ -140,15 +127,13 @@ const AuthModal = () => {
               onChange={(event) => setPhoneNumber(event.target.value)}
               onFocus={() => setPhoneNumberError("")}
             />
-            
+
             {phoneNumberError && (
               <p className="inline-flex text-sm text-red-500">
                 {phoneNumberError}
               </p>
             )}
           </div>
-
-
 
           <div className="pb-2">
             <label for="email-address" className="sr-only">
@@ -163,7 +148,6 @@ const AuthModal = () => {
               onFocus={() => setAddressError("")}
             />
 
-            
             {addressError && (
               <p className="inline-flex text-sm text-red-500">{addressError}</p>
             )}
@@ -181,18 +165,15 @@ const AuthModal = () => {
               onChange={(event) => setEmail(event.target.value)}
               onFocus={() => setEmailError("")}
             />
-            
+
             {emailError && (
               <p className="inline-flex text-sm text-red-500">{emailError}</p>
-             
             )}
-
-{SameemailError && (
-              <p className="inline-flex text-sm text-red-500">{SameemailError}</p>
-             
+            {serveError && (
+              <p className="inline-flex text-sm text-red-500">
+                {serveError.replace(/"/g, "")}
+              </p>
             )}
-
-
           </div>
           <div className="pb-2">
             <label for="password" className="sr-only">
@@ -216,11 +197,11 @@ const AuthModal = () => {
         </div>
 
         <div>
-
-        {error ?(
-              <p className="inline-flex text-sm text-red-500">Email already taken{error}</p>
-            ):null}
-            
+          {error ? (
+            <p className="inline-flex text-sm text-red-500">
+              Email already taken{error}
+            </p>
+          ) : null}
 
           <button
             className="modal-action group relative flex w-full justify-center rounded-md border border-transparent bg-[#097435] py-2 px-4 text-sm font-medium text-white hover:bg-[#009879] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
@@ -275,7 +256,6 @@ const AuthModal = () => {
           window.location.reload();
         }
       } catch (error) {
-        console.log(error.message);
         setIsLoading(false);
       }
     };
