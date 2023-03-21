@@ -12,6 +12,8 @@ const Filter = ({ isSearch = true, onSearch, categories, onFilter }) => {
     setChosen(filter);
   };
 
+  const uniqueCategories = [...new Set(categories?.map(({ name }) => name))];
+
   return (
     <div className="flex flex-col gap-4 my-[40px]">
       {isSearch && <DynamicSearch onSearch={handleKeyWordChange} />}
@@ -26,8 +28,8 @@ const Filter = ({ isSearch = true, onSearch, categories, onFilter }) => {
         >
           All
         </button>
-        {categories?.length > 0 &&
-          categories?.map(({ name }, index) => (
+        {uniqueCategories.length > 0 &&
+          uniqueCategories.map((name, index) => (
             <button
               className="btn btn-sm gap-2 font-normal btn-outline border-[#D9DADB] text-[#4B5157] text-[14px] normal-case"
               key={index}
