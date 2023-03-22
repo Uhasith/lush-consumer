@@ -33,9 +33,8 @@ const AuthModal = () => {
       return emailRegex.test(email);
     };
 
-    const phoneRegex = /^\d$/;
-
-    const fullNameRegex = /^\S+ \S+$/;
+    const phoneRegex =
+      /(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/g;
 
     const handleRegistration = async (event) => {
       event.preventDefault();
@@ -43,10 +42,7 @@ const AuthModal = () => {
         setFullNameError("Fullname is required");
         return;
       }
-      if (!fullNameRegex.test(fullName)) {
-        setFullNameError("Please Check Your Fullname Again");
-        return;
-      }
+
       if (!phoneRegex.test(phoneNumber)) {
         setPhoneNumberError("Please enter a valid phone number");
         return;
@@ -85,10 +81,9 @@ const AuthModal = () => {
         localStorage.setItem("serverError", JSON.stringify(errorMessage));
       }
       setIsLoading(false);
-      if(localStorage.getItem('user')){
+      if (localStorage.getItem("user")) {
         window.location.reload();
       }
-  
     };
 
     return (
