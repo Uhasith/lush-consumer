@@ -3,13 +3,16 @@ import { request } from "src/request";
 import logo from "../../assets/images/Logo.png";
 import Loading from "../Loading";
 
+
 const AuthModal = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const RegisterationForm = () => {
-    const [fullName, setFullName] = useState("");
-    const [fullNameError, setFullNameError] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [FirstNameError, setFirstNameError] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [LastNameError, setLastNameError] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [phoneNumberError, setPhoneNumberError] = useState("");
     const [address, setAddress] = useState("");
@@ -23,10 +26,12 @@ const AuthModal = () => {
     useEffect(() => {
       return () => {
         localStorage.removeItem("serverError");
+        
       };
     }, []);
 
     let serveError = localStorage.getItem("serverError");
+
 
     const isEmailValid = (email) => {
       const emailRegex = /\S+@\S+\.\S+/;
@@ -38,10 +43,19 @@ const AuthModal = () => {
 
     const handleRegistration = async (event) => {
       event.preventDefault();
-      if (fullName === "") {
-        setFullNameError("Fullname is required");
+     
+
+
+      if (firstName === "") {
+        setFirstNameError("First Name is required");
         return;
       }
+      
+      if (lastName === "") {
+        setLastNameError("Last Name is required");
+        return;
+      }
+      
 
       if (!phoneRegex.test(phoneNumber)) {
         setPhoneNumberError("Please enter a valid phone number");
@@ -59,15 +73,29 @@ const AuthModal = () => {
         setPasswordError("A strong password is required");
         return;
       }
+      // const payload = {
+      //   FirstName:FirstName .split(" ")?.[0],
+      //   LastName: LastName.split(" ")?.[1] || "",
+      //   userType: "Visitor",
+      //   email,
+      //   password,
+      //   phoneNumber,
+      //   address,
+      // };
+
       const payload = {
-        firstName: fullName.split(" ")?.[0],
-        lastName: fullName.split(" ")?.[1] || "",
+        firstName,
+        lastName,
         userType: "Visitor",
         email,
         password,
         phoneNumber,
         address,
       };
+
+  
+
+
       setIsLoading(true);
       try {
         const response = await request("POST", "/v1/auth/register", payload);
@@ -90,25 +118,52 @@ const AuthModal = () => {
       <form id="signupForm" className="mt-8 space-y-6">
         <input type="hidden" name="remember" value="true" />
         <div className="-space-y-px rounded-md shadow-sm">
-          <div className="pb-2">
+
+        <div class="columns-2 ...">
+ <div> <div className="pb-2">
             <label for="email-address" className="sr-only">
-              Full Name
+            First Name
             </label>
             <input
-              name="fullName"
+              name="FirstName"
               type="name"
               className="relative block w-full appearance-none input input-success input-bordered bg-primary-content text-gray-900"
-              placeholder="Full Name"
-              onChange={(event) => setFullName(event.target.value)}
-              onFocus={() => setFullNameError("")}
+              placeholder="First Name"
+              onChange={(event) => setFirstName(event.target.value)}
+              onFocus={() => setFirstNameError("")}
             />
 
-            {fullNameError && (
+            {FirstNameError && (
               <p className="inline-flex text-sm text-red-500">
-                {fullNameError}
+                {FirstNameError}
               </p>
             )}
-          </div>
+          </div></div>
+ <div> <div className="pb-2">
+            <label for="email-address" className="sr-only">
+              Last Name
+            </label>
+            <input
+              name="LastName"
+              type="name"
+              className="relative block w-full appearance-none input input-success input-bordered bg-primary-content text-gray-900"
+              placeholder="Last Name"
+              onChange={(event) => setLastName(event.target.value)}
+              
+              onFocus={() => setLastNameError("")}
+            />
+
+            {LastNameError && (
+              <p className="inline-flex text-sm text-red-500">
+                {LastNameError}
+              </p>
+            )}
+
+            
+          </div> </div>
+
+</div>
+         
 
           <div className="pb-2">
             <label for="email-address" className="sr-only">
@@ -230,6 +285,17 @@ const AuthModal = () => {
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
+
+    useEffect(() => {
+      return () => {
+   
+        localStorage.removeItem("loginvalidationError");
+      };
+    }, []);
+
+    
+    let loginvalidationError = localStorage.getItem("loginvalidationError");
+
     const handleLogin = async (event) => {
       event.preventDefault();
       try {
@@ -245,13 +311,21 @@ const AuthModal = () => {
           if (response?.tokens) {
             localStorage.setItem("tokens", JSON.stringify(response.tokens));
             localStorage.setItem("user", JSON.stringify(response.user));
+          localStorage.removeItem("loginvalidationError");
+
           }
 
           setIsLoading(false);
           window.location.reload();
         }
       } catch (error) {
-        setIsLoading(false);
+        const LoginerrorMessage = error?.message || "Something went wrong";
+        localStorage.setItem("loginvalidationError", JSON.stringify(LoginerrorMessage));
+      
+      }
+      setIsLoading(false);
+      if (localStorage.getItem("user")) {
+        window.location.reload();
       }
     };
     return (
@@ -274,6 +348,8 @@ const AuthModal = () => {
             {emailError && (
               <p className="inline-flex text-sm text-red-500">{emailError}</p>
             )}
+
+
           </div>
           <div className="pb-2">
             <label for="password" className="sr-only">
@@ -293,6 +369,13 @@ const AuthModal = () => {
                 {passwordError}
               </p>
             )}
+
+{loginvalidationError && (
+              <p className="inline-flex text-sm text-red-500">
+                {loginvalidationError.replace(/"/g, "")}
+              </p>
+            )}
+            
           </div>
         </div>
 

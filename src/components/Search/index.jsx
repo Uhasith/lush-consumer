@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import _ from "lodash";
 import { useFarm } from "src/hooks";
 import { BASE_URL } from "src/constants";
+import { Scrollbars } from 'react-custom-scrollbars-2';
+
 
 const Search = ({ isSearch, title }) => {
   const { currentFarm } = useFarm();
@@ -18,6 +20,7 @@ const Search = ({ isSearch, title }) => {
         <div>
           
           {/* //////////////////////////////////Update card////////////////////////////////////// */}
+          <a className="font-bold  mb-2 text-lg text-gray-600 hover:text-green-500 hover:text-xl" href={`/farmers/${id}`}>
 
           <div
             className="w-64 sm:w-48 md:w-60 lg:w-300 h-80 max-h-full hover:max-h-screen bg-white rounded-lg shadow-lg p-6  hover:bg-green-100 ..."
@@ -36,9 +39,7 @@ const Search = ({ isSearch, title }) => {
             />
 
             <div className="text-center mt-5 py-4">
-              <a className="font-bold  mb-2 text-lg text-gray-600 hover:text-green-500 hover:text-xl" href={`/farmers/${id}`}>
                 {`${firstName} ${lastName}`}
-              </a>
             </div>
           </div>
 
@@ -62,6 +63,8 @@ const Search = ({ isSearch, title }) => {
 
           
         </div> */}
+              </a>
+
         </div>
       ))
     ) : (
@@ -136,14 +139,22 @@ const Search = ({ isSearch, title }) => {
             </div>
           </div>
         )}
+        <Scrollbars style={{ width: "100%", height: 400}}>
+
         {title && (
+
           <div classNameName="mt-[40px]">
             <h2 classNameName="font-bold text-[#262D33] text-xl">{title}</h2>
           </div>
         )}
+
         <div className="flex mt-[40px]" style={{ columnGap: "4rem" }}>
-          <ShortSearchList />
+
+        <ShortSearchList />
+      
         </div>
+      </Scrollbars>
+
         <hr className="mt-10" />
       </div>
     </div>

@@ -1,5 +1,4 @@
 import { Hero, Map, Search, Contact } from "../../components";
-import { Scrollbars } from 'react-custom-scrollbars-2';
 
 const LandingPage = () => {
   return (
@@ -13,11 +12,11 @@ const LandingPage = () => {
       </div>
       
       <div class="container" style={{  overflowX: 'auto' }}>
-        {/* //////////////////////////////////////////////////////////// */}
-        <Scrollbars style={{ width: "100%", height: 500 }}>
+  
+ 
         <Search isSearch={true} />
-      </Scrollbars>
-        {/* //////////////////////////////////////////////////////////// */}
+    
+     
         <Contact />
       </div>
     </>
