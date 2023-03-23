@@ -74,8 +74,8 @@ const Hero = () => {
         <h1 class="text-4xl font-bold text-[#275847]">
           Fresh Produce has never been closer
         </h1>
-        <div className="pt-[50px] flex justify-between">
-          <div className="flex gap-12">
+        <div className="pt-[50px] flex justify-between ">
+          <div className="flex gap-12 rounded-lg ...">
             <input
               type="text"
               placeholder="Search by Produce (Fruits, Vegetables, Honey, wine...)"
@@ -92,9 +92,9 @@ const Hero = () => {
             />}
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 ">
             <button
-              class="btn gap-2 bg-[#097435] border-none normal-case rounded-lg h-[40px]"
+              class="btn gap-2 bg-[#097435] border-none normal-case rounded-lg h-[40px] ml-8 "
               onClick={handleSearch}
             >
               <svg
@@ -116,7 +116,7 @@ const Hero = () => {
 
             {isMapView ? (
               <button
-                class="btn gap-2 bg-[#097435] border-none normal-case rounded-lg h-[40px]"
+                class="btn gap-2 bg-[#097435] border-none normal-case rounded-lg h-[40px] "
                 onClick={handleListVist}
               >
                 <svg
