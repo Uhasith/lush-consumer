@@ -3,30 +3,27 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { request } from "src/request";
 import CheckoutForm from "./CheckoutForm";
+import { useCart } from "src/hooks";
 
 function Payment() {
+  const { orderConfirmData } = useCart();
+
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    (async function anyNameFunction() {
+    (async function createPaymentIntent() {
       const { publishableKey } = await request("GET", `/v1/payment/config`);
       setStripePromise(loadStripe(publishableKey));
     })();
   }, []);
 
   useEffect(() => {
-    //   fetch("/create-payment-intent", {
-    //     method: "POST",
-    //     body: JSON.stringify({}),
-    //   }).then(async (result) => {
-    //     var { clientSecret } = await result.json();
-    //     setClientSecret(clientSecret);
-    //   });
-    (async function anyNameFunction() {
+    (async function createPaymentIntent() {
       const { clientSecret } = await request(
         "POST",
-        `/v1/payment/create-payment-intent`
+        `/v1/payment/create-payment-intent`,
+        { amount: Number(orderConfirmData?.totalPrice) }
       );
       setClientSecret(clientSecret);
     })();
