@@ -1,14 +1,30 @@
 import { BASE_URL } from "src/constants";
 import Flashsales  from "src/components/Flashsale/Flashsale";
-
+import { useCart } from "src/hooks";
 import React, { useEffect } from 'react';
 
 
-const ProductDetail = ({ product }) => {
 
-  ///////////////////////////////////////////////3.15.2023////////////////////////
- 
-  ///////////////////////////////////////////////3.15.2023////////////////////////
+
+
+  const ProductDetail = ({product,item}) => {
+
+    
+
+    const { onItemAdd } = useCart();
+    const handleAddToCart = (item) => {
+      onItemAdd({ ...item, qty: 1, totalPrice: item?.price });
+    };
+
+    const {onItemIncrement, onItemDecrement } = useCart();
+
+
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
+
 
   return (
     <div className="py-12 flex gap-10">
@@ -42,9 +58,7 @@ const ProductDetail = ({ product }) => {
         </div>
         <div className="flex gap-4">
           <h2 className="font-bold text-[20px]">Product Discription</h2>
-          <h2 className="font-bold text-[20px] text-[#939699]">
-            About this items
-          </h2>
+         
         </div>
         <div className="flex">
           <p>{product?.description}</p>
@@ -54,7 +68,7 @@ const ProductDetail = ({ product }) => {
           <div className="flex gap-4">
             <div className="flex">
               <h2 className="font-bold">
-                €{product?.price} per {product?.unitType}
+                €{product?.price} {item?.totalPrice} per {product?.unitType}
               </h2>
             </div>
           </div>
@@ -62,9 +76,12 @@ const ProductDetail = ({ product }) => {
             <div className="flex items-center">
               <h2>Quantity</h2>
             </div>
+
+
             <div className="flex">
               <div className="flex border-2 items-center rounded-full gap-6 py-2 px-4">
-                <div className="cursor-pointer">
+                <div className="cursor-pointer"
+                onClick={() => onItemDecrement(item)}>
                   <svg
                     width="14"
                     height="2"
@@ -75,8 +92,15 @@ const ProductDetail = ({ product }) => {
                     <rect width="14" height="2" rx="1" fill="#BCBFC2" />
                   </svg>
                 </div>
-                <p>1</p>
-                <div className="cursor-pointer">
+                <p>{item?.qty}</p>
+                <div
+  className="cursor-pointer"
+    onClick={() => {
+      onItemIncrement(item);
+      console.log(item?.qty);
+    }}
+  
+>
                   <svg
                     width="14"
                     height="14"
@@ -94,11 +118,15 @@ const ProductDetail = ({ product }) => {
                 </div>
               </div>
             </div>
+
+
+
           </div>
         </div>
         <hr />
         <div className="flex">
-          <button class="btn bg-[#097435] border-none normal-case rounded-lg h-[40px] w-[180px] gap-3">
+          <button class="btn bg-[#097435] border-none normal-case rounded-lg h-[40px] w-[180px] gap-3"
+          onClick={() => handleAddToCart(product)}>
             <svg
               width="18"
               height="17"

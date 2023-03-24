@@ -116,6 +116,7 @@ const Cart = ({ handleTabChange, setMustAuthenticate}) => {
           <div className="text-sm text-[#4B5157]">€{item?.price}</div>
         </td>
         <td>
+
           <div className="flex border-2 items-center rounded-full gap-6 py-2 px-4  justify-around">
             <div
               className="cursor-pointer"
@@ -152,6 +153,8 @@ const Cart = ({ handleTabChange, setMustAuthenticate}) => {
               </svg>
             </div>
           </div>
+
+          
         </td>
         <td>
           <div className="text-sm text-[#4B5157] text-center">
