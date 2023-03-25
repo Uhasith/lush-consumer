@@ -7,7 +7,7 @@ import React, { useEffect } from 'react';
 
 
 
-  const ProductDetail = ({product,item}) => {
+  const ProductDetail = ({product,item,productID}) => {
 
     
 
@@ -16,8 +16,11 @@ import React, { useEffect } from 'react';
       onItemAdd({ ...item, qty: 1, totalPrice: item?.price });
     };
 
-    const {onItemIncrement, onItemDecrement } = useCart();
-
+    const { onba } = useCart();
+    const CartItem = ({ item }) => {
+      onba({ ...item, qty: 1, totalPrice: item?.price });
+    };
+    // const {onItemIncrement, onItemDecrement } = CartItem();
 
 
     useEffect(() => {
@@ -81,7 +84,11 @@ import React, { useEffect } from 'react';
             <div className="flex">
               <div className="flex border-2 items-center rounded-full gap-6 py-2 px-4">
                 <div className="cursor-pointer"
-                onClick={() => onItemDecrement(item)}>
+    onClick={() => {
+      // onItemDecrement(item);
+   
+    }}
+    >
                   <svg
                     width="14"
                     height="2"
@@ -92,12 +99,12 @@ import React, { useEffect } from 'react';
                     <rect width="14" height="2" rx="1" fill="#BCBFC2" />
                   </svg>
                 </div>
-                <p>{item?.qty}</p>
+                <p>{item}</p>
                 <div
   className="cursor-pointer"
     onClick={() => {
-      onItemIncrement(item);
-      console.log(item?.qty);
+      onba(item?.qty);
+      console.log(item);
     }}
   
 >

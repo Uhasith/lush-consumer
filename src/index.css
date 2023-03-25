@@ -66,3 +66,21 @@ body {
 .filtercard-image{
   width: 200px;
 }
+
+
+/* ////////////////////////Responcive//////////////////////// */
+/* Styles for screens smaller than 600px */
+@media only screen and (max-width: 600px) {
+  /* CSS styles go here */
+}
+
+/* Styles for screens between 600px and 900px */
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  /* CSS styles go here */
+}
+
+/* Styles for screens larger than 900px */
+@media only screen and (min-width: 900px) {
+  /* CSS styles go here */
+}
+/* ////////////////////////Responcive//////////////////////// */
