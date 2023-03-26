@@ -5,9 +5,11 @@ const ManufactureDetail = ({ product }) => {
     <div className="flex flex-col gap-6">
       <h3 className="font-bold text-[#262D33] text-sm">{title}</h3>
       <div className="flex gap-8">
-        <img src={image} class="rounded-lg max-w-xs" alt="product-img" />
+{image && <img src={image} class="rounded-lg max-w-xs" alt="product-img" /> }
+
         <div>
           <p className="text=[#4B5157] text-justify">{firstPara}</p>
+
 
           {secondPara && (
             <p className="mt-4 text=[#4B5157] text-justify">{secondPara}</p>

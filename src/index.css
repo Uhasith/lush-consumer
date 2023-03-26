@@ -109,7 +109,14 @@ body {
 }
 
 /* Styles for screens between 600px and 900px */
-@media only screen and (min-width: 600px) and (max-width: 900px) {}
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .desktop-framerbanner {
+    display: none;
+  }
+  .mobile-framerbanner {
+    display: block;
+  }
+}
 
 /* Styles for screens larger than 900px */
 @media only screen and (min-width: 900px) {
