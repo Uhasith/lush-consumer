@@ -203,7 +203,7 @@ const Cart = ({ handleTabChange, setMustAuthenticate}) => {
   };
 
   return (
-    <div className="flex flex-col px-[20%] pb-48">
+    <div className="flex flex-col mobile-cart  pb-48">
       {items?.length == 0 ? (
         <ItemsNotFound />
       ) : (
@@ -216,7 +216,7 @@ const Cart = ({ handleTabChange, setMustAuthenticate}) => {
             <table className="table w-full">
               <thead>
                 <tr>
-                  <th className="text-[#4B5157] normal-case text-[14px] font-normal">
+                  <th className="text-[#4B5157] normal-case text-[14px] font-normal ">
                     Item
                   </th>
                   <th className="text-[#4B5157] normal-case text-[14px] font-normal">

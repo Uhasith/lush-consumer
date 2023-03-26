@@ -13,7 +13,7 @@ const CartCheckout = ({ handleTabChange }) => {
   };
 
   return (
-    <div className="flex flex-col px-[20%] pb-48">
+    <div className="flex flex-col pb-48">
       <div className="flex flex-col gap-4">
         <h2 className="font-bold">Payment </h2>
         <h2 className="text-[#4B5157]">Please choose a payment method </h2>

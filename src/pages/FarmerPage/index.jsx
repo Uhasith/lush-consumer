@@ -107,7 +107,6 @@ const FarmerPage = () => {
                     description,
                   }}
                 />
-                <hr />
               </div>
             )
           )

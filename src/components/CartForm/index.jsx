@@ -65,12 +65,12 @@ const CartForm = ({ handleTabChange }) => {
   };
 
   return (
-    <div className="flex flex-col px-[20%] pb-48">
+    <div className="flex flex-col  pb-48 mobile-cart">
       <div className="flex gap-3">
         <h2 className="font-bold">Shipping Address</h2>
       </div>
 
-      <div className="form flex flex-col py-8 w-3/4">
+      <div className="form flex flex-col py-8 w-full">
         <Formik
           initialValues={initialFormValues}
           validationSchema={shippingSchema}

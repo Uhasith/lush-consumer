@@ -1,17 +1,26 @@
+import { Scrollbars } from 'react-custom-scrollbars-2';
+
+
 const Search = ({ isSearch, title }) => {
   const ProductSlider = () => {
     return [1, 2, 3, 4].map((result) => (
-      <div class="card card-compact w-96 bg-base-100 shadow-none">
-        <img
+
+
+<>
+
+      {/* ////////////////////////////////////////////////////////////////// */}
+      <div className="w-full bg-white border border-gray-200 rounded-lg ">
+      <img
           src="https://i.ibb.co/m0DqT0x/image-167-1.png"
           class="rounded-lg"
+          width={"100%"}
           alt="Shoes"
         />
-        <div class="card-body" style={{ padding: "16px 0px" }}>
-          <h2 class="text-sm font-bold">€99</h2>
-          <h2 class="pt-1 font-bold text-lg">
-            Trethowan's Dary and Puxton Court Farm
-          </h2>
+        <div className="p-5">
+        <h2 class="text-sm font-bold">€99</h2>
+          <a href="#">
+            <h5 className="mb-2 font-bold tracking-tight"> Trethowan's Dary and Puxton Court Farm</h5>
+          </a>
           <div class="card-actions justify-start flex gap-3">
             <div class="flex gap-1 items-center">
               <svg
@@ -52,10 +61,19 @@ const Search = ({ isSearch, title }) => {
           </div>
         </div>
       </div>
+
+      {/* ////////////////////////////////////////////////////////////////// */}
+
+  
+
+</>
+
     ));
   };
 
   return (
+
+    
     <div class="bg-white flex align-start gap-4">
       <div class="w-full">
         {isSearch && (
@@ -91,9 +109,13 @@ const Search = ({ isSearch, title }) => {
             <h2 className="font-bold text-[#262D33] text-xl">{title}</h2>
           </div>
         )}
-        <div class="flex mt-[40px]" style={{ columnGap: "5rem" }}>
+
+<Scrollbars style={{ width: "100%", height: 400}}>
+
+        <div class="flex mt-[40px]" style={{ columnGap: "2rem" }}>
           <ProductSlider />
         </div>
+        </Scrollbars>
         <hr class="mt-10" />
       </div>
     </div>

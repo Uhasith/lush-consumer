@@ -19,27 +19,59 @@ const ManufactureDetail = ({ product }) => {
 
   return (
     <>
+
+
+
+
+      
       <div className="py-8 flex flex-col gap-8">
         <div className="flex">
-          <h2 className="font-bold text-[#262D33] text-xl">From Manufacture</h2>
+          <h2 className="font-bold text-[#262D33] text-xl ml-5">From Manufacture</h2>
         </div>
-        <div className="flex flex-col gap-8">
-          <Description
+
+
+{/* ///////////////////////////////////////////////////////////////////////// */}
+<div className="flex flex-col items-center  md:flex-row md:max-w-full ml-5">
+      <Description
             image={
               product?.images?.[0]
                 ? `${BASE_URL}/v1/documents/product-img/${product?.images?.[0]}`
                 : "https://via.placeholder.com/350x150"
+                
             }
+            
             title="Product Discription"
+    
+          />
+        <div className="flex flex-col justify-between p-4 leading-normal">
+        <Description
             firstPara={product?.description}
             secondPara=""
           />
-          <Description
-            image="https://i.ibb.co/j8CwdYV/image-083-1.png"
-            title="About Us"
-            firstPara="Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel fringilla est ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis eu volutpat odio facilisis mauris sit amet massa vitae tortor condimentum lacinia quis vel eros donec ac odio"
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center  md:flex-row md:max-w-full ml-5">
+      <Description
+        image={"https://i.ibb.co/j8CwdYV/image-083-1.png"}
+        title="About Us"
+
+          />
+        <div className="flex flex-col justify-between p-4 leading-normal">
+        <Description
+            firstPara={product?.description}
+            secondPara=""
           />
         </div>
+      </div>
+      
+      {/* ///////////////////////////////////////////////////////////////////////// */}
+     
+
+    
+
+
+
       </div>
       <hr class="mt-4" />
     </>

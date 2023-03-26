@@ -7,10 +7,12 @@ body {
   height: 100%;
   width: 100%;
 }
+
 #root {
   height: 100%;
   width: 100%;
 }
+
 .react-responsive-modal-modal {
   width: 60%;
   overflow: visible !important;
@@ -53,7 +55,8 @@ body {
 
 #messages {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New";
-  display: none; /* hide initially, then show once the first message arrives */
+  display: none;
+  /* hide initially, then show once the first message arrives */
   background-color: #0a253c;
   color: #00d924;
   padding: 20px;
@@ -63,24 +66,77 @@ body {
 }
 
 
-.filtercard-image{
+.filtercard-image {
   width: 200px;
 }
 
 
+.table th:first-child {
+  position:inherit;
+  left: 0px;
+  z-index: 11;
+}
+
 /* ////////////////////////Responcive//////////////////////// */
 /* Styles for screens smaller than 600px */
 @media only screen and (max-width: 600px) {
-  /* CSS styles go here */
+
+  .mobile-searchbyproduct {
+    display: block;
+
+  }
+  .hero-header-text {
+    padding-top: 30px;
+
+  }
+  .desktop-searchbyproduct {
+    display: none
+  }
+  .mobile-framerbanner {
+    display: block;
+  }
+  .desktop-framerbanner {
+    display: none;
+  }
+  .mobile-filtercard_title-p{
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+  .mobile-cart{
+    padding-left: 0%;
+    padding-right: 0%;
+  }
 }
 
 /* Styles for screens between 600px and 900px */
-@media only screen and (min-width: 600px) and (max-width: 900px) {
-  /* CSS styles go here */
-}
+@media only screen and (min-width: 600px) and (max-width: 900px) {}
 
 /* Styles for screens larger than 900px */
 @media only screen and (min-width: 900px) {
-  /* CSS styles go here */
+
+  .mobile-searchbyproduct {
+    display: none;
+  }
+
+  .hero-header-text {
+    padding-top: 60px;
+  }
+
+  .desktop-framerbanner {
+    display: block;
+  }
+  .mobile-framerbanner {
+    display: none;
+  }
+  .mobile-filtercard_title-p{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .mobile-cart{
+    padding-left: 20%;
+    padding-right: 20%;
+  }
 }
+
 /* ////////////////////////Responcive//////////////////////// */
