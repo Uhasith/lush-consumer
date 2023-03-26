@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
-
+import { useNavigate } from "react-router";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
-
+  const navigate = useNavigate();
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -14,29 +14,28 @@ export default function CheckoutForm() {
     e.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
 
     setIsProcessing(true);
-
-    const { error } = await stripe.confirmPayment({
+    const { paymentIntent } = await stripe.confirmPayment({
       elements,
+      redirect: "if_required",
+
       confirmParams: {
-        // Make sure to change this to your payment completion page
         return_url: `${window.location.origin}/success`,
       },
     });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
-    } else {
+    navigate({
+      pathname: "/success",
+      search: `?paymentIntent=${paymentIntent?.id}&amount=${paymentIntent?.amount}`,
+    });
+
+    if (!paymentIntent) {
       setMessage("An unexpected error occured.");
     }
 
-
-    
     setIsProcessing(false);
   };
 
@@ -58,7 +57,6 @@ export default function CheckoutForm() {
         </span>
       </button>
 
-      {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
   );
