@@ -45,7 +45,7 @@ const CartForm = ({ handleTabChange }) => {
     const products = items.map((item) => {
       return {
         product: item.id,
-        buyer: _user?._id,
+        buyer: _user?.id,
         price: String(Number(item?.price) * Number(item?.qty)),
         qty: String(item.qty),
         isPickUp: false,
@@ -57,7 +57,7 @@ const CartForm = ({ handleTabChange }) => {
       totalPrice: String(subTotal),
       shippingDetails: omit(values, ["city", "emailConfirmation"]),
       status: "Pending",
-      buyer: _user?._id,
+      buyer: _user?.id,
     };
 
     onOrderConfirmData(order);
@@ -135,9 +135,7 @@ const CartForm = ({ handleTabChange }) => {
               <div className="flex gap-4 pb-4">
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text font-bold">
-                      Address 2 
-                    </span>
+                    <span className="label-text font-bold">Address 2</span>
                   </label>
                   <input
                     type="text"

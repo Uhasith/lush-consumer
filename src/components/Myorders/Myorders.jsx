@@ -19,7 +19,7 @@ function Myorders() {
       const allOrders = response.results;
 
       const filteredOrders = allOrders.filter(
-        (order) => order.buyer && order.buyer.id === user._id
+        (order) => order.buyer && order.buyer.id === user.id
       );
 
       setOrders(filteredOrders);
