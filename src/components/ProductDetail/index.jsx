@@ -1,27 +1,40 @@
 import { BASE_URL } from "src/constants";
 import Flashsales from "src/components/Flashsale/Flashsale";
 import { useCart } from "src/hooks";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-const ProductDetail = ({ product, item, productID }) => {
+const ProductDetail = ({ product }) => {
+  
+  const { items, onItemIncrement, onItemDecrement } = useCart();
   const { onItemAdd } = useCart();
+
   const handleAddToCart = (item) => {
     onItemAdd({ ...item, qty: 1, totalPrice: item?.price });
   };
 
-  const { onba } = useCart();
-  const CartItem = ({ item }) => {
-    onba({ ...item, qty: 1, totalPrice: item?.price });
-  };
-  // const {onItemIncrement, onItemDecrement } = CartItem();
+  const [quantity, setQuantity] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    const items = JSON.parse(localStorage.getItem("items")) || [];
+    const filterProduct = items.find((item) => item.id === product.id);
+    if (filterProduct) {
+      setQuantity(filterProduct.qty);
+    }
+  }, [product]);
+
+  // Update quantity state whenever product quantity is changed
+  useEffect(() => {
+    const filterProduct = items.find((item) => item.id === product.id);
+    if (filterProduct) {
+      setQuantity(filterProduct.qty);
+    } else {
+      setQuantity(null);
+    }
+  }, [items, product]);
 
   return (
     <>
-      {/* //////////////////////////////////////////////////////////////////////////////// */}
       <div className="flex flex-col items-center rounded-lg  md:flex-row md:max-w-full p-1">
         <img
           src={
@@ -62,7 +75,7 @@ const ProductDetail = ({ product, item, productID }) => {
               <div className="flex gap-4">
                 <div className="flex">
                   <h2 className="font-bold">
-                    €{product?.price} {item?.totalPrice} per {product?.unitType}
+                    €{product?.price} per {product?.unitType}
                   </h2>
                 </div>
               </div>
@@ -75,9 +88,7 @@ const ProductDetail = ({ product, item, productID }) => {
                   <div className="flex border-2 items-center rounded-full gap-6 py-2 px-4">
                     <div
                       className="cursor-pointer"
-                      onClick={() => {
-                        // onItemDecrement(item);
-                      }}
+                      onClick={() => onItemDecrement(product)}
                     >
                       <svg
                         width="14"
@@ -89,12 +100,11 @@ const ProductDetail = ({ product, item, productID }) => {
                         <rect width="14" height="2" rx="1" fill="#BCBFC2" />
                       </svg>
                     </div>
-                    <p>{item}</p>
+                    <p>{quantity}</p>
                     <div
                       className="cursor-pointer"
                       onClick={() => {
-                        onba(item?.qty);
-                        console.log(item);
+                        onItemIncrement(product);
                       }}
                     >
                       <svg
@@ -140,7 +150,6 @@ const ProductDetail = ({ product, item, productID }) => {
           </div>{" "}
         </div>
       </div>
-      {/* //////////////////////////////////////////////////////////////////////////////// */}
     </>
   );
 };

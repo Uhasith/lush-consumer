@@ -21,7 +21,6 @@ const FilterCard = ({
 
   return (
     <>
-      {/* ////////////////////////////////////////////////////////// */}
       <div
         
         className="flex flex-col w-full items-center bg-white border border-gray-100 rounded-lg shadow md:flex-row md:max-w-full p-1 "
@@ -48,7 +47,6 @@ const FilterCard = ({
               </div>
               <div className="flex">
                 <div className="flex gap-2">
-                  {/* <p className="font-bold text-sm line-through">€169</p> */}
                   <p className="font-bold text-sm">€{price}</p>
                 </div>
                 <div className="divider divider-horizontal" />
@@ -109,8 +107,6 @@ const FilterCard = ({
           </div>
         </div>
       </div>
-      {/* ////////////////////////////////////////////////////////// */}
-      
     </>
   );
 };
