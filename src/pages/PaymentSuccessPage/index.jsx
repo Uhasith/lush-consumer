@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "src/hooks";
 import { request } from "src/request";
 import { isEmpty } from "lodash";
@@ -8,20 +9,28 @@ const PaymentSuccessPage = () => {
   const { orderConfirmData } = useCart();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const paymentIntent = searchParams.get("paymentIntent");
+  const amount = searchParams.get("amount");
 
   const handleContinueShopping = () => {
     navigate("/");
   };
 
   useEffect(() => {
-    if (!isEmpty(orderConfirmData)) {
+    if (!isEmpty(orderConfirmData) && paymentIntent && amount) {
       handleSubmitPayment();
     }
   }, []);
 
   const handleSubmitPayment = async () => {
     try {
-      await request("POST", `/v1/orders`, orderConfirmData);
+      await request("POST", `/v1/orders`, {
+        orderData: orderConfirmData,
+        paymentData: { paymentIntent, amount },
+      });
 
       localStorage.removeItem("subTotal");
       localStorage.removeItem("orderConfirmData");
