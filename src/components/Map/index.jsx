@@ -7,6 +7,8 @@ import { GOOGLE_API_KEY } from "src/constants";
 const FormComponent = () => {
   const { farms, onFarmChange, onCurrentFarmSelect } = useFarm();
 
+  const [postalCode, setPostalCode] = useState("");
+
   const [center, setCenter] = useState({
     lat: null,
     lng: null,
@@ -116,11 +118,9 @@ const FormComponent = () => {
               type="text"
               placeholder="Enter Your Postalcode or Location "
               className="input input-bordered w-[300px] border-none"
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
             />
-
-            <button className="btn btn-square bg-[#097435] border-none">
-              GO
-            </button>
           </div>
         </div>
       </div>
@@ -171,14 +171,25 @@ const FormComponent = () => {
                 text="Current Location"
               />
               {farms?.length > 0 &&
-                farms?.map((farm, index) => (
-                  <MarketComponent
-                    lat={farm?.location?.coordinates[1]}
-                    lng={farm?.location?.coordinates[0]}
-                    data={farm}
-                    key={index}
-                  />
-                ))}
+                (postalCode
+                  ? farms
+                      .filter((farm) => farm.postalCode === postalCode)
+                      .map((farm, index) => (
+                        <MarketComponent
+                          lat={farm?.location?.coordinates[1]}
+                          lng={farm?.location?.coordinates[0]}
+                          data={farm}
+                          key={index}
+                        />
+                      ))
+                  : farms?.map((farm, index) => (
+                      <MarketComponent
+                        lat={farm?.location?.coordinates[1]}
+                        lng={farm?.location?.coordinates[0]}
+                        data={farm}
+                        key={index}
+                      />
+                    )))}
             </GoogleMapReact>
           )}
         </div>
