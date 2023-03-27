@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useEffect } from "react";
 import useLocalStorage from "use-local-storage";
 import PropTypes from "prop-types";
 import _ from "lodash";
@@ -26,7 +27,10 @@ function CartProvider({ children }) {
     "subTotal",
     initialState.subTotal
   );
-  const [orderConfirmData, setOrderConfirmData] = useLocalStorage("orderConfirmData", initialState.orderConfirmData);
+  const [orderConfirmData, setOrderConfirmData] = useLocalStorage(
+    "orderConfirmData",
+    initialState.orderConfirmData
+  );
 
   useEffect(() => {
     handleTotalPriceUpdate();
@@ -98,8 +102,7 @@ function CartProvider({ children }) {
 
   const handleOrderConfirmData = (data) => {
     setOrderConfirmData(data);
-  }
-
+  };
 
   return (
     <CartContext.Provider

@@ -19,7 +19,7 @@ function Myorders() {
       const allOrders = response.results;
 
       const filteredOrders = allOrders.filter(
-        (order) => order.buyer && order.buyer.id === user._id
+        (order) => order.buyer && order.buyer.id === user.id
       );
 
       setOrders(filteredOrders);
@@ -54,7 +54,7 @@ function Myorders() {
                 <td className="border px-4 py-2">
                   {moment(order?.createdAt).format("YYYY-MM-DD") || "-"}
                 </td>
-                <td className="border px-4 py-2">{order?.totalPrice}</td>
+                <td className="border px-4 py-2">{`${order?.totalPrice}€`}</td>
                 <td className="border px-4 py-2">
                   {moment(order?.createdAt).format("YYYY-MM-DD") || "-"}
                 </td>
