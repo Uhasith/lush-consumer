@@ -60,7 +60,7 @@ function Myorders() {
                 </td>
                 <td className="border px-4 py-2"> 
                   <span
-                    className={`inline-block py-1 px-2 rounded-md ${order.status === "Completed"? "bg-green-500 text-white": (order.status === "Dispatched" ? "bg-yellow-500 text-black" : "bg-red-500 text-black")}`}
+                    className={`inline-block py-1 px-2 rounded-md ${order.status === "Completed"? "bg-green-500 text-white": (order.status === "Dispatched" ? "bg-green-500 text-black" : "bg-red-500 text-black")}`}
                   >
 
 
