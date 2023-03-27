@@ -111,12 +111,12 @@ const FormComponent = () => {
   return (
     <div className="map-button">
       <div className="map_search">
-        <h5 className="text-white mb-1">Enter Your Postalcode or Location </h5>
+        <h5 className="text-white mb-1">Enter Your Postalcode</h5>
         <div className="form-control">
           <div className="input-group">
             <input
               type="text"
-              placeholder="Enter Your Postalcode or Location "
+              placeholder="Enter Your Postalcode"
               className="input input-bordered w-[300px] border-none"
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
