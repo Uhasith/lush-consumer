@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { request } from "src/request";
 import moment from "moment";
+import { Scrollbars } from 'react-custom-scrollbars-2';
+
 
 function Myorders() {
   const [orders, setOrders] = useState([]);
@@ -34,6 +36,8 @@ function Myorders() {
         <h1 className="text-white text-5xl font-bold">Order History</h1>
       </div>
       <div className="container mx-auto my-12">
+      <Scrollbars style={{ width: "100%", height: 400}}>
+
         <table className="table-auto w-full rounded-md overflow-hidden">
           <thead>
             <tr className="bg-gradient-to-br from-teal-900 to-teal-900 text-white text-center">
@@ -60,7 +64,7 @@ function Myorders() {
                 </td>
                 <td className="border px-4 py-2"> 
                   <span
-                    className={`inline-block py-1 px-2 rounded-md ${order.status === "Completed"? "bg-green-500 text-white": (order.status === "Dispatched" ? "bg-yellow-500 text-black" : "bg-red-500 text-black")}`}
+                    className={`inline-block py-1 px-2 rounded-md ${order.status === "Completed"? "bg-green-500 text-white": (order.status === "Dispatched" ? "bg-green-500 text-black" : "bg-red-500 text-black")}`}
                   >
 
 
@@ -73,6 +77,8 @@ function Myorders() {
             ))}
           </tbody>
         </table>
+        </Scrollbars>
+
       </div>
     </Fragment>
   );
