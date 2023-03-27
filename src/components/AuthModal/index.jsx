@@ -428,6 +428,8 @@ const AuthModal = () => {
             Sign in
           </button>
         </div>
+
+        
       </form>
     );
   };

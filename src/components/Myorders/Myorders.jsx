@@ -58,14 +58,14 @@ function Myorders() {
                 <td className="border px-4 py-2">
                   {moment(order?.createdAt).format("YYYY-MM-DD") || "-"}
                 </td>
-                <td className="border px-4 py-2">
+                <td className="border px-4 py-2"> 
                   <span
-                    className={`inline-block py-1 px-2 rounded-md ${
-                      order.status === "Completed"
-                        ? "bg-green-500 text-white"
-                        : "bg-yellow-500 text-black"
-                    }`}
+                    className={`inline-block py-1 px-2 rounded-md ${order.status === "Completed"? "bg-green-500 text-white": (order.status === "Dispatched" ? "bg-yellow-500 text-black" : "bg-red-500 text-black")}`}
                   >
+
+
+
+
                     {order?.status}
                   </span>
                 </td>

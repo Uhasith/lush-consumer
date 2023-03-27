@@ -36,6 +36,7 @@ const ProductDetailsPage = () => {
         <div className="container">
           {!isEmpty(product) && <ProductDetail product={product} />}
           {!isEmpty(product) && <ManufactureDetail product={product} />}
+          
           <ProductSlider title="Related to this items" />
           {isLoading && <Loading />}
         </div>

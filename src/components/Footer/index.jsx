@@ -11,9 +11,11 @@ export const Footer = () => {
       }}
     >
       <div class="container">
-        <div class="flex -mx-4">
-          <div class="w-full sm:w-1/2 lg:w-3/12 px-4">
-            <div class="w-full mb-10">
+
+{/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
+<div class="container mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="flex justify-center">      <div class="w-full mb-10">
               <h4 class=" text-white text-lg font-semibold mb-9">
                 LUSH FARMER
               </h4>
@@ -101,11 +103,8 @@ export const Footer = () => {
                 </a>
               </div>
               <p class="text-base  text-white">&copy; 2023 by Lush Farmers</p>
-            </div>
-          </div>
-
-          <div class="w-full sm:w-1/2 lg:w-2/12 px-4">
-            <div class="w-full mb-10">
+            </div></div>
+    <div class="flex justify-center"> <div class="w-full mb-10">
               <h4 class="text-white text-lg font-semibold mb-9">Company</h4>
               <ul>
                 <li>
@@ -151,10 +150,8 @@ export const Footer = () => {
                   </a>
                 </li>
               </ul>
-            </div>
-          </div>
-          <div class="w-full sm:w-1/2 lg:w-2/12 px-4">
-            <div class="w-full mb-10">
+            </div></div>
+    <div class="flex justify-center"> <div class="w-full mb-10">
               <h4 class=" text-white text-lg font-semibold mb-9">Company</h4>
               <ul>
                 <li>
@@ -200,51 +197,58 @@ export const Footer = () => {
                   </a>
                 </li>
               </ul>
-            </div>
-          </div>
+            </div></div>
+    <div class="flex justify-center"> 
+    <div class="divider lg:divider-horizontal bg-gray" />
 
-          <div class="divider lg:divider-horizontal bg-gray" />
+<div
 
-          <div
-            class="px-4"
-            style={{
-              width: "auto",
-              display: "flex",
-              flexDirection: "column",
-              rowGap: "20px",
-            }}
-          >
-            <h3 class="text-white font-bold">Subscribe Now</h3>
-            <h3 class="text-white">
-              Would like to get more details about lush farmer
-            </h3>
-            <div class="form-control w-full">
-              <div class="input-group w-[400px]">
-                <input
-                  type="text"
-                  placeholder="Enter your email"
-                  class="input input-bordered bg-transparent w-[450px] border border-white"
-                />
-                <button class="btn btn-square bg-[#F7C35E] border-none">
-                  <svg
-                    width="18"
-                    height="16"
-                    viewBox="0 0 18 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M17.9084 0.414096C17.8282 0.34674 17.7142 0.331112 17.6176 0.374074L0.155693 8.15011C0.0616842 8.19199 0.00114611 8.28189 1.60703e-05 8.38122C-0.00111397 8.48055 0.057433 8.57169 0.150527 8.61547L3.6 10.1075C3.69062 10.1502 10.8 6.55938 10.8 6.55938L6.43411 11.2471C6.34792 11.3397 6.3 11.4614 6.3 11.5879V15.076C6.3 15.5262 6.84822 15.7471 7.1603 15.4227L9.44099 13.0524L13.0421 14.7992C13.1125 14.8315 13.194 14.8328 13.2655 14.803C13.337 14.7731 13.3915 14.7151 13.4148 14.6438L17.9876 0.685225C18.0196 0.587749 17.9884 0.481453 17.9084 0.414096Z"
-                      fill="white"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+  style={{
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    rowGap: "20px",
+  }}
+>
+  <h3 class="text-white font-bold">Subscribe Now</h3>
+  <h3 class="text-white ">
+    Would like to get more details about lush farmer
+  </h3>
+  <div class="form-control w-full">
+    <div class="input-group w-full">
+      <input
+        type="text"
+        placeholder="Enter your email"
+        class="input input-bordered bg-transparent w-[450px] border border-white"
+      />
+      <button class="btn btn-square bg-[#F7C35E] border-none">
+        <svg
+          width="18"
+          height="16"
+          viewBox="0 0 18 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M17.9084 0.414096C17.8282 0.34674 17.7142 0.331112 17.6176 0.374074L0.155693 8.15011C0.0616842 8.19199 0.00114611 8.28189 1.60703e-05 8.38122C-0.00111397 8.48055 0.057433 8.57169 0.150527 8.61547L3.6 10.1075C3.69062 10.1502 10.8 6.55938 10.8 6.55938L6.43411 11.2471C6.34792 11.3397 6.3 11.4614 6.3 11.5879V15.076C6.3 15.5262 6.84822 15.7471 7.1603 15.4227L9.44099 13.0524L13.0421 14.7992C13.1125 14.8315 13.194 14.8328 13.2655 14.803C13.337 14.7731 13.3915 14.7151 13.4148 14.6438L17.9876 0.685225C18.0196 0.587749 17.9884 0.481453 17.9084 0.414096Z"
+            fill="white"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div></div>
+ 
+  </div>
+</div>
+{/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
+
+       
+
+
+
       </div>
       <div>
         <span class="absolute left-0 bottom-0 z-[-1]">

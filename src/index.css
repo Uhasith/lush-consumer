@@ -7,10 +7,12 @@ body {
   height: 100%;
   width: 100%;
 }
+
 #root {
   height: 100%;
   width: 100%;
 }
+
 .react-responsive-modal-modal {
   width: 60%;
   overflow: visible !important;
@@ -53,7 +55,8 @@ body {
 
 #messages {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New";
-  display: none; /* hide initially, then show once the first message arrives */
+  display: none;
+  /* hide initially, then show once the first message arrives */
   background-color: #0a253c;
   color: #00d924;
   padding: 20px;
@@ -63,6 +66,136 @@ body {
 }
 
 
-.filtercard-image{
+.filtercard-image {
   width: 200px;
 }
+
+
+.table th:first-child {
+  position:inherit;
+  left: 0px;
+  z-index: 11;
+}
+
+.map-button{
+  position: relative;
+}
+
+.map_search{
+  position: absolute;
+  border-radius: 8px;
+  z-index: 1;
+  background-color: #5AAE59;
+  padding: 12px 20px 20px 20px;
+ margin-top: 75px;
+ margin-left: 25px;
+
+}
+
+
+.help_me_order{
+  position: absolute;
+  z-index: 1;
+
+  background-color: #097435;
+  padding: 10px 0px 10px 0px;
+  border-radius: 8px;
+  position: absolute;
+  right:0;
+  bottom:0;
+  margin-bottom: 75px;
+  margin-right: 25px;
+}
+
+
+.right-arrow{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+
+.helpme-button{
+  line-height: 20px;
+}
+/* ////////////////////////Responcive//////////////////////// */
+/* Styles for screens smaller than 600px */
+@media only screen and (max-width: 600px) {
+
+  .map_search{
+    position: absolute;
+    border-radius: 8px;
+    z-index: 1;
+    background-color: #5AAE59;
+    padding: 12px 20px 20px 20px;
+   margin-top: 75px;
+   margin-left: 0px;
+   width: 100%;
+  
+  }
+
+  .mobile-searchbyproduct {
+    display: block;
+
+  }
+  .hero-header-text {
+    padding-top: 30px;
+
+  }
+  .desktop-searchbyproduct {
+    display: none
+  }
+  .mobile-framerbanner {
+    display: block;
+  }
+  .desktop-framerbanner {
+    display: none;
+  }
+  .mobile-filtercard_title-p{
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+  .mobile-cart{
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+}
+
+/* Styles for screens between 600px and 900px */
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .desktop-framerbanner {
+    display: none;
+  }
+  .mobile-framerbanner {
+    display: block;
+  }
+}
+
+/* Styles for screens larger than 900px */
+@media only screen and (min-width: 900px) {
+
+  .mobile-searchbyproduct {
+    display: none;
+  }
+
+  .hero-header-text {
+    padding-top: 60px;
+  }
+
+  .desktop-framerbanner {
+    display: block;
+  }
+  .mobile-framerbanner {
+    display: none;
+  }
+  .mobile-filtercard_title-p{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .mobile-cart{
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
+
+/* ////////////////////////Responcive//////////////////////// */

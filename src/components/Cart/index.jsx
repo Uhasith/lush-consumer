@@ -116,6 +116,7 @@ const Cart = ({ handleTabChange, setMustAuthenticate}) => {
           <div className="text-sm text-[#4B5157]">€{item?.price}</div>
         </td>
         <td>
+
           <div className="flex border-2 items-center rounded-full gap-6 py-2 px-4  justify-around">
             <div
               className="cursor-pointer"
@@ -152,6 +153,8 @@ const Cart = ({ handleTabChange, setMustAuthenticate}) => {
               </svg>
             </div>
           </div>
+
+          
         </td>
         <td>
           <div className="text-sm text-[#4B5157] text-center">
@@ -200,7 +203,7 @@ const Cart = ({ handleTabChange, setMustAuthenticate}) => {
   };
 
   return (
-    <div className="flex flex-col px-[20%] pb-48">
+    <div className="flex flex-col mobile-cart  pb-48">
       {items?.length == 0 ? (
         <ItemsNotFound />
       ) : (
@@ -213,7 +216,7 @@ const Cart = ({ handleTabChange, setMustAuthenticate}) => {
             <table className="table w-full">
               <thead>
                 <tr>
-                  <th className="text-[#4B5157] normal-case text-[14px] font-normal">
+                  <th className="text-[#4B5157] normal-case text-[14px] font-normal ">
                     Item
                   </th>
                   <th className="text-[#4B5157] normal-case text-[14px] font-normal">

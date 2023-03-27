@@ -36,6 +36,11 @@ const FormComponent = () => {
   };
 
   const MarketComponent = ({ data }) => (
+
+<>
+
+
+
     <div className="flex bg-white" onClick={() => handleFarmClick(data)}>
       <span>
         <svg
@@ -68,6 +73,7 @@ const FormComponent = () => {
       </span>
       <p className="font-bold text-lg">{data?.name}</p>
     </div>
+    </>
   );
   const AnyReactComponent = ({ text }) => (
     <div className="flex bg-white">
@@ -102,10 +108,73 @@ const FormComponent = () => {
       </span>
       <p className="font-bold text-lg">{text}</p>
     </div>
+    
   );
 
   return (
+
+
+    <div className="map-button">
+
+    {/* /////////////////add mapsearch////////////////////// */}
+    <div className="map_search">
+  <h5 className="text-white mb-1">Enter Your Postalcode or Location  </h5> 
+      <div className="form-control">
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Enter Your Postalcode or Location "
+                className="input input-bordered w-[300px] border-none"
+              
+              />
+
+              <button
+                className="btn btn-square bg-[#097435] border-none"
+                
+              >
+              GO
+              </button>
+            </div>
+          </div>
+    </div>
+    {/* /////////////////add mapsearch////////////////////// */}
+
+    {/* ////////////////////add help me order/////////////////////// */}
+
+
+    <div class="flex flex-row-reverse flex-col-reverse... bb">
+    <button className="help_me_order ">
+
+
+<div class="flex">
+<div class="flex-none w-24">
+
+
+  
+ <div className="text-white font-medium helpme-button">  HELP ME <br /> <span className="text-white font-bold ">ORDER</span></div> 
+
+
+</div>
+<div class="flex-initial w-14 ...">
+<div className="right-arrow">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 21C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5ZM6 13H14.5L11 16.5L12.42 17.92L18.34 12L12.42 6.08L11 7.5L14.5 11H6V13Z" fill="white"/>
+</svg>
+</div>
+</div>
+
+</div>
+</button>
+</div>
+
+
+
+  
+    {/* ////////////////////add help me order/////////////////////// */}
+    
     <div class="flex flex-wrap items-center justify-center py-12">
+
+      
       <div style={{ height: "100vh", width: "100%" }}>
         {center?.lat && (
           <GoogleMapReact
@@ -133,6 +202,10 @@ const FormComponent = () => {
         )}
       </div>
     </div>
+
+    </div>
+
+    
   );
 };
 
